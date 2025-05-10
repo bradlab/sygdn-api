@@ -1,0 +1,82 @@
+name: SyGDN CI/CD
+# Déclenchement du workflow lors de l'envoi de code sur la branche develop ou lors d'une pull request vers develop
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    # Lancement d’un conteneur PostgreSQL pour que les tests puissent accéder à une DB
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.DB_NAME }}
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: test
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+    steps:
+      # Cloner le code du repo dans la VM GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=moderate
+
+      - name: Validate static typing
+        run: npx tsc --noEmit
+
+      # - name: Run TypeORM migrations
+      #   run: npm run migration:run
+
+      - name: Run tests
+        run: npm run test
+
+      # Lancer un scan de test d’intrusion avec OWASP ZAP
+      - name: Run OWASP ZAP Baseline Scan
+        run: |
+          docker run -t owasp/zap2docker-stable zap-baseline.py \
+            -t http://localhost:3000 \
+            -r zap-report.html
+      - name: Upload ZAP report
+        uses: actions/upload-artifact@v3
+        with:
+          name: zap-security-report
+          path: zap-report.html
+          
+      
+
+      - name: Build the app
+        run: npm run build
+
+      # Suite déploiement
+
