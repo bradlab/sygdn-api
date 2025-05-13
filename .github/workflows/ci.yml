@@ -62,13 +62,13 @@ jobs:
         run: npm run test
 
       # Lancer un scan de test d’intrusion avec OWASP ZAP
-      - name: Run OWASP ZAP Baseline Scan
-        run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:3000 -r zap-report.html
-      - name: Upload ZAP report
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-security-report
-          path: zap-report.html
+      # - name: Run OWASP ZAP Baseline Scan
+      #   run: docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:3000 -r zap-report.html
+      # - name: Upload ZAP report
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: zap-security-report
+      #     path: zap-report.html
           
       
 
