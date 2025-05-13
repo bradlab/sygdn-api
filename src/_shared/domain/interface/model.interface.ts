@@ -1,0 +1,41 @@
+import { SexEnum, MaritalStatusEnum } from 'app/enum';
+
+export abstract class ITimestamp {
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt?: Date;
+}
+
+export class Permission extends ITimestamp {
+  id: string;
+  designation: string;
+  description?: string;
+  value: string;
+  group?: string;
+  isActivated: boolean;
+}
+
+export class Job extends ITimestamp {
+  id: string;
+  designation: string;
+  description?: string;
+  isActivated: boolean;
+  permissions?: Permission[];
+}
+
+export interface User extends ITimestamp {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email?: string;
+  phone: string;
+  address?: string;
+  sex?: SexEnum;
+  job?: Job;
+  isActivated: boolean;
+}
+
+export interface OUser extends Omit<User, 'job'> {
+  job?: string;
+}
+
