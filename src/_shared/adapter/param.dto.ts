@@ -92,7 +92,7 @@ export class BasicPersonnalInfoDTO implements Partial<Person> {
   })
   @IsString()
   @IsNotEmpty()
-  firstname: string;
+  name: string;
 
   @ApiProperty({
     type: String,

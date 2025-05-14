@@ -8,7 +8,9 @@ import {
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { DataHelper } from 'adapter/helper/data.helper';
-import { IJwtPayload, User } from 'domain/interface';
+import { IAuthService } from 'auth/auth.service.interface';
+import { IJwtPayload } from 'domain/interface';
+import { Staff } from 'domain/model/staff.model';
 import { Request } from 'express';
 
 export const _extractTokenFromHeader = (
@@ -23,7 +25,7 @@ export class StaffGuard implements CanActivate {
   private readonly logger = new Logger();
 
   constructor(
-    // private authService: IAuthService,
+    private authService: IAuthService,
     private jwtService: JwtService,
     private reflector: Reflector,
   ) {}
@@ -71,12 +73,12 @@ export class StaffGuard implements CanActivate {
     return rest;
   }
 
-  private async _validate(payload: IJwtPayload): Promise<User | undefined> {
+  private async _validate(payload: IJwtPayload): Promise<Staff | undefined> {
     if (!DataHelper.isEmpty(payload)) {
-      // return await this.authService.search({
-      //   ...payload,
-      //   isActivated: true,
-      // });
+      return await this.authService.search({
+        ...payload,
+        isActivated: true,
+      });
     }
     return undefined;
   }

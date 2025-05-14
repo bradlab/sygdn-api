@@ -1,7 +1,3 @@
-export enum ApiEnum {
-  TMONEY = 'TMONEY',
-  FIREBASE = 'FIREBASE',
-}
 export enum SexEnum {
   MALE = 'MALE',
   FEMALE = 'FEMALE',
@@ -22,4 +18,19 @@ export enum PeriodUnitEnum {
   DAY = 'DAY',
   HOUR = 'HOUR',
   MINUTE = 'MINUTE',
+}
+
+export enum RoleEnum {
+  ADMIN = 'ADMIN',
+  DIRECTOR = 'DIRECTOR',
+  MANAGER = 'MANAGER',
+  SECRETARY = 'SECRETARY',
+  COLLEAGUE = 'COLLEAGUE',
+}
+
+export enum StepStatusEnum {
+  PENDING = 'PENDING',
+  IN_PROGRESS = 'IN_PROGRESS',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
 }
