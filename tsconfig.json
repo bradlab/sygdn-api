@@ -26,7 +26,9 @@
       "adapter": ["./src/_shared/adapter"],
       "adapter/*": ["./src/_shared/adapter/*"],
       "framework": ["./src/_shared/framework"],
-      "framework/*": ["./src/_shared/framework/*"]
+      "framework/*": ["./src/_shared/framework/*"],
+      "auth/*": ["./src/auth/*"],
+      "user/*": ["./src/user/*"]
     }
   }
 }

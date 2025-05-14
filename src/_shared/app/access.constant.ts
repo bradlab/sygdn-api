@@ -2,64 +2,67 @@ import { RuleEnum } from './enum/rule.enum';
 
 export const RULES = [
   {
-    designation: 'Gestion des categories',
-    description: 'Gérer tout ce qui concerne les categories',
+    designation: 'Gestion des dossiers',
+    description: 'Gérer tout ce qui concerne les dossiers',
     tag: null,
     permissions: [
       {
-        designation: 'Afficher les categories',
-        value: RuleEnum.CAN_SHOW_CATEGORY_LIST,
+        designation: 'Créer un dossier',
+        value: RuleEnum.CAN_CREATE_DOSSIER,
+        description: null,
+      },
+      {
+        designation: 'Supprimer un dossier',
+        value: RuleEnum.CAN_DELETE_DOSSIER,
+        description: null,
+      },
+      {
+        designation: 'Afficher les dossiers',
+        value: RuleEnum.CAN_SHOW_DOSSIER_LIST,
         description: null,
       },
       {
         designation: 'Afficher une categorie',
-        value: RuleEnum.CAN_SHOW_CATEGORY,
-        description: null,
-      },
-      // GESTION DES ATTRIBUTS
-      {
-        designation: 'Afficher les attributs',
-        value: RuleEnum.CAN_SHOW_ATTRIBUTE_LIST,
+        value: RuleEnum.CAN_SHOW_DOSSIER,
         description: null,
       },
       {
-        designation: 'Afficher un attribut',
-        value: RuleEnum.CAN_SHOW_ATTRIBUTE,
+        designation: 'Modifier un dossier',
+        value: RuleEnum.CAN_UPDATE_DOSSIER,
         description: null,
-      },
+      }
     ],
   },
   {
-    designation: 'Gestion des ressources (Produits & Services)',
-    description: 'Gérer tout ce qui concerne les produits',
+    designation: 'Gestion des affectations',
+    description: 'Gérer tout ce qui concerne les affectations de dossiers',
     tag: null,
     permissions: [
       {
-        designation: 'Afficher la liste des produits',
-        value: RuleEnum.CAN_SHOW_PRODUCT_LIST,
+        designation: 'Afficher la liste des affectations',
+        value: RuleEnum.CAN_SHOW_AFFECTATION_LIST,
         description: null,
       },
       {
-        designation: "Afficher les informations d'un produit",
-        value: RuleEnum.CAN_SHOW_PRODUCT,
+        designation: "Afficher les informations d'une affectation",
+        value: RuleEnum.CAN_SHOW_AFFECTATION,
         description: null,
       },
       {
-        designation: 'Modifier un produit',
-        value: RuleEnum.CAN_UPDATE_PRODUCT,
+        designation: 'Modifier une affectation",',
+        value: RuleEnum.CAN_UPDATE_AFFECTATION,
         description: null,
       },
     ],
   },
   {
-    designation: 'Gestion des opérations',
-    description:
-      'Gérer des opération pour mieux les tracés leur historique et faire des statistiques',
+    designation: 'Gestion des étapes de domaine',
+    description: 'Gérer tout ce qui concerne les étapes de domaine',
     tag: null,
     permissions: [
       {
         designation: 'Afficher la liste de toutes les opérations',
-        value: RuleEnum.CAN_SHOW_OPERATION_LIST,
+        value: RuleEnum.CAN_SHOW_DOSSIER_STEP_LIST,
         description: null,
       },
     ],

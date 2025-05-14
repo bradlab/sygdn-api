@@ -1,17 +1,23 @@
 import { faker } from '@faker-js/faker/.';
+import { MaritalStatusEnum, RoleEnum } from 'app/enum';
+import { Staff } from 'domain/model/staff.model';
 
-export const USER_DATA: Partial<any> = {
-  firstname: faker.person.firstName(),
-  lastname: faker.person.lastName(),
+export const USER_DATA: Partial<Staff> = {
+  name: faker.person.fullName(),
+  degree: faker.person.jobArea(),
+  role: faker.helpers.enumValue(RoleEnum),
+  maritalStatus: faker.helpers.enumValue(MaritalStatusEnum),
   email: faker.internet.email(),
   phone: faker.phone.number(),
   address: faker.location.streetAddress(),
 };
 
-export const USER_MODEL_DATA: Partial<any> = {
+export const USER_MODEL_DATA: Partial<Staff> = {
   id: faker.string.uuid(),
-  firstname: faker.person.firstName(),
-  lastname: faker.person.lastName(),
+  name: faker.person.fullName(),
+  degree: faker.person.jobArea(),
+  role: faker.helpers.enumValue(RoleEnum),
+  maritalStatus: faker.helpers.enumValue(MaritalStatusEnum),
   email: faker.internet.email(),
   phone: faker.phone.number(),
   address: faker.location.streetAddress(),

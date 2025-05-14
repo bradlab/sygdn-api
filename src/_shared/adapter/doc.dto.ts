@@ -7,9 +7,9 @@ import {
   IsEmail,
   IsPhoneNumber,
 } from 'class-validator';
-import { User } from 'domain/interface';
+import { Staff } from 'domain/model/staff.model';
 
-export class DocUserDTO implements Partial<User> {
+export class DocUserDTO implements Partial<Staff> {
   @ApiProperty({ type: String, name: 'id' })
   id: string;
 
