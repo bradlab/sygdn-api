@@ -1,11 +1,6 @@
-import { IBasicPersonnalInfoDTO } from "app/person.input.dto";
+import { RoleEnum } from "app/enum";
 import { ISigninAccoutDTO, IUpdatePwdDTO, IForgotPasswordDTO } from "domain/interface";
 import { Staff } from "domain/model/staff.model";
-
-
-export interface ICreateUserDTO extends IBasicPersonnalInfoDTO {
-  avatar?: string;
-}
 
 export interface ISignedUserDTO {
   user: Staff;
@@ -17,7 +12,9 @@ export interface ISignedUserDTO {
 }
 export interface IUserQuery {
   ids?: string[];
-  courriel?: string;
+  email?: string;
+  degree?: string;
+  role?: RoleEnum;
   phone?: string;
 }
 

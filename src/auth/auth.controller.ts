@@ -23,7 +23,7 @@ import { SigninAccoutDTO, ForgotPasswordDTO, ResetPasswordDTO, UpdatePwdDTO } fr
 import { Public, GetUser } from 'adapter/decorator';
 import { DocSignedUserDTO } from './doc.user.dto';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { UserFactory } from 'adapter/factory/user.factory';
+import { StaffFactory } from 'adapter/factory/user.factory';
 import { Staff } from 'domain/model/staff.model';
 
 @ApiTags('User Authentication')
@@ -63,7 +63,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Token connexion' })
   // @ApiResponse({ type: DocSignedUserDTO })
   signinByToken(@GetUser() user: Staff): Partial<Staff> {
-    return UserFactory.getUser(user);
+    return StaffFactory.getUser(user);
   }
 
   /**
@@ -80,7 +80,7 @@ export class AuthController {
     if (user) {
       return {
         accessToken,
-        ...UserFactory.getUser(user),
+        ...StaffFactory.getUser(user),
       };
     }
     throw new UnauthorizedException('User not found');

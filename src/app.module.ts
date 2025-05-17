@@ -9,10 +9,10 @@ import { CustomValidationPipe } from 'adapter/pipe/custom-validator.pipe';
 import { WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { SeedsModule } from './_seeder/seeds.module';
-import { AuthModule } from 'auth/auth.module';
+import { UserModule } from 'user/user.module';
 
 @Module({
-  imports: [AuthModule],
+  imports: [UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
