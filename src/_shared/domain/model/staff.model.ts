@@ -1,7 +1,7 @@
 import { MaritalStatusEnum, RoleEnum } from "app/enum";
 import { Person } from "domain/interface/person.model";
 
-export interface Staff extends Person {
+export class Staff extends Person {
   role: RoleEnum;
   password: string;
   email?: string;
@@ -10,3 +10,5 @@ export interface Staff extends Person {
   maritalStatus?: MaritalStatusEnum;
 }
 
+export interface OUser extends Partial<Staff> {
+}

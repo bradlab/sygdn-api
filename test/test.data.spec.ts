@@ -8,7 +8,7 @@ export const USER_DATA: Partial<Staff> = {
   role: faker.helpers.enumValue(RoleEnum),
   maritalStatus: faker.helpers.enumValue(MaritalStatusEnum),
   email: faker.internet.email(),
-  phone: faker.phone.number(),
+  phone: faker.phone.number({ style: 'international' }),
   address: faker.location.streetAddress(),
 };
 

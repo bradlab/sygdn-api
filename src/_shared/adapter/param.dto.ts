@@ -128,7 +128,7 @@ export class BasicPersonnalInfoDTO implements Partial<Person> {
   })
   @IsOptional()
   @IsString()
-  address?: string;
+  address: string;
 
   @ApiProperty({
     type: String,

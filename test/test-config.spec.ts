@@ -119,7 +119,7 @@ export abstract class TestGlobalConfig {
   });
 
   static mockDataService = () => ({
-    products: this.mockInRepository(),
+    users: this.mockInRepository(),
   });
 
   static mockService = () => ({
