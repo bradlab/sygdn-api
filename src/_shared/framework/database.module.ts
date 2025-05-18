@@ -3,11 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DBRepository } from './database.service';
 import { StaffEntity } from './schema/staff.entity';
 import { IDBRepository } from 'app/abstract/db.abstract';
+import { DomainEntity } from './schema/domain.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       StaffEntity,
+      DomainEntity,
     ]),
   ],
   providers: [
