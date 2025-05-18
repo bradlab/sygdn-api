@@ -20,9 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { DataGenerator } from 'domain/generator/data.generator';
 import { IDParamDTO, IDsParamDTO } from 'adapter/param.dto';
-import { RuleEnum } from 'app/enum';
-import { GetUser } from 'adapter/decorator';
-import { OUser, Staff } from 'domain/model/staff.model';
+import { OUser } from 'domain/model/staff.model';
 import { IUserService } from './user.service.interface';
 import { DocUserDTO } from 'auth/doc.user.dto';
 import { RegisterUserDTO, UpdateUserDTO, UserQueryDTO } from './user.input.dto';
@@ -74,7 +72,6 @@ export class UserController {
     return null as unknown as OUser;
   }
 
-  // @HasPermission(RuleEnum.CAN_SHOW_STAFF)
   @Get(':id')
   @ApiOperation({
     summary: 'One User',
@@ -115,7 +112,6 @@ export class UserController {
    */
 
   @Patch()
-  // @HasPermission(RuleEnum.CAN_UPDATE_STAFF)
   @ApiConsumes('multipart/form-data', 'application/json')
   @ApiOperation({ summary: 'Update user account' })
   @ApiBody({ type: UpdateUserDTO })
@@ -125,7 +121,6 @@ export class UserController {
   }
 
   @Patch('state')
-  // @HasPermission(RuleEnum.CAN_SET_STAFF_STATE)
   @ApiOperation({ summary: "Modification d'état des utilisateurs" })
   @ApiBody({
     type: IDsParamDTO,
@@ -145,7 +140,6 @@ export class UserController {
    */
 
   @Delete('clean')
-  // @HasPermission(RuleEnum.CAN_DELETE_STAFF)
   @ApiOperation({ summary: 'Clean removed Accounts' })
   @ApiResponse({ type: Boolean })
   clean(): Promise<boolean> {
@@ -153,7 +147,6 @@ export class UserController {
   }
 
   @Delete(':id')
-  // @HasPermission(RuleEnum.CAN_DELETE_STAFF)
   @ApiOperation({ summary: 'Remove Account' })
   @ApiParam({
     type: String,

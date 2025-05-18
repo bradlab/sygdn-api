@@ -1,6 +1,20 @@
 import { faker } from '@faker-js/faker/.';
 import { MaritalStatusEnum, RoleEnum } from 'app/enum';
+import { IDomain } from 'domain/model/domain.model';
 import { Staff } from 'domain/model/staff.model';
+import { ICreateDomainDTO } from 'src/domain/domain.service.interface';
+
+export const DOMAIN_DATA: ICreateDomainDTO = {
+  name: faker.person.fullName(),
+  description: faker.lorem.paragraph(),
+};
+
+export const DOMAIN_MODEL_DATA: Partial<IDomain> = {
+  name: faker.person.fullName(),
+  description: faker.lorem.paragraph(),
+  createdAt: faker.date.past(),
+  updatedAt: faker.date.past(),
+};
 
 export const USER_DATA: Partial<Staff> = {
   name: faker.person.fullName(),

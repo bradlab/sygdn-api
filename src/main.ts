@@ -12,14 +12,28 @@ import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { fDate } from './_shared/util/date.helper';
 import { HttpExceptionFilter } from 'adapter/http/http-exception.filter';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({});
   const helmetOptions = {
-    //
+    contentSecurityPolicy: {
+        directives: {
+          // Laissez les directives par défaut de helmet...
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          'script-src': ["'self'", 'unpkg.com', 'cdn.jsdelivr.net', "'unsafe-inline'"],
+          'style-src': ["'self'", 'unpkg.com', 'cdn.jsdelivr.net', "'unsafe-inline'"], // pour les styles
+          'img-src': ["'self'", 'data:'], // pour les images (si vous utilisez des data URLs)
+        },
+      },
+      // Désactivez le middleware hsts en développement si vous travaillez en HTTP
+      // helmet applique HSTS par défaut, ce qui peut causer des soucis en dev local
+      hsts: process.env.NODE_ENV === 'production', // Applique HSTS uniquement en production
   };
   app.use(helmet(helmetOptions));
+
   app.useGlobalPipes(
     new ValidationPipe({
       // forbidUnknownValues: true,

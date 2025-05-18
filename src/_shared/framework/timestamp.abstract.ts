@@ -1,14 +1,20 @@
 import { Person } from 'domain/interface/person.model';
 import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ObjectType, Field, } from '@nestjs/graphql';
 
+
+@ObjectType({ isAbstract: true })
 export abstract class ATimestamp {
+  @Field()
   @CreateDateColumn()
   createdAt: Date;
 
+  @Field()
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at' })
+  @Field({ nullable: true })
+  @DeleteDateColumn({ name: 'deleted_at' }) // Nom de la colonne dans la base de données
   deletedAt?: Date;
 }
 
