@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -25,7 +26,9 @@ import { IUserService } from './user.service.interface';
 import { DocUserDTO } from 'auth/doc.user.dto';
 import { RegisterUserDTO, UpdateUserDTO, UserQueryDTO } from './user.input.dto';
 import { StaffFactory } from 'adapter/factory/user.factory';
+import { StaffGuard } from 'adapter/guard/auth.guard';
 
+@UseGuards(StaffGuard)
 @ApiTags('Staff or Admin')
 @ApiBearerAuth()
 @Controller('staff')

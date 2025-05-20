@@ -43,6 +43,6 @@ export class DossierEntity extends ATimestamp implements Dossier {
   comments?: IComment[];
 
   @Field(() => [AffectationEntity], { nullable: true })
-  @OneToMany(() => AffectationEntity, affectation => affectation.dossier)
+  @OneToMany(() => AffectationEntity, affectation => affectation.dossierStep)
   affectations?: Affectation[];
 }

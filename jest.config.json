@@ -21,6 +21,8 @@
     "^step/(.*)$": "<rootDir>/step/$1",
     "^affectation/(.*)$": "<rootDir>/affectation/$1",
     "^dossier/(.*)$": "<rootDir>/dossier/$1",
-    "^comment/(.*)$": "<rootDir>/comment/$1"
+    "^comment/(.*)$": "<rootDir>/comment/$1",
+    "^task/(.*)$": "<rootDir>/task/$1",
+    "^dossier-step/(.*)$": "<rootDir>/dossier-step/$1"
   }
 }

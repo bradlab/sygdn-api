@@ -3,7 +3,7 @@ import { ITask } from 'domain/model/task.model';
 export interface ICreateTaskDTO {
   name: string;
   description?: string;
-  dossierStepId: string;
+  stepId: string;
 }
 
 export interface IUpdateTaskDTO extends Partial<ICreateTaskDTO> {

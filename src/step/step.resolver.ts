@@ -3,7 +3,13 @@ import { CreateStepDTO, UpdateStepDTO } from './step.input.dto';
 import { Step } from 'domain/model/step.model';
 import { StepEntity } from 'framework/schema/step.entity';
 import { IStepService } from './step.service.interface';
+import { UseGuards } from '@nestjs/common';
+import { StaffGuard } from 'adapter/guard/auth.guard';
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
+@UseGuards(StaffGuard)
+@ApiTags('Domain step management')
+@ApiBearerAuth()
 @Resolver(() => StepEntity)
 export class StepResolver {
   constructor(private readonly stepService: IStepService) {}

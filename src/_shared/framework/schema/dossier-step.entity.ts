@@ -9,6 +9,8 @@ import { ITask } from 'domain/model/task.model';
 import { TaskEntity } from './task.entity';
 import { DossierEntity } from './dossier.entity';
 import { StepStatusEnum } from 'app/enum';
+import { Affectation } from 'domain/model/affectation.model';
+import { AffectationEntity } from './affectation.entity';
 
 @ObjectType()
 @Entity('dossier_steps')
@@ -36,6 +38,10 @@ export class DossierStepEntity extends ATimestamp implements DossierStep {
   @Field(() => StepEntity)
   @ManyToOne(() => StepEntity, { eager: true })
   step: Step;
+
+  @Field(() => [AffectationEntity], { nullable: true })
+  @OneToMany(() => AffectationEntity, affection => affection.dossierStep)
+  affectations?: Affectation[];
 
   @Field(() => [TaskEntity], { nullable: true })
   @OneToMany(() => TaskEntity, task => task.step)

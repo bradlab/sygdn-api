@@ -1,9 +1,10 @@
+import { StepStatusEnum } from 'app/enum';
 import { DossierStep } from 'domain/model/dossier-step.model';
 
 export interface ICreateDossierStepDTO {
   startDate: Date;
   endDate?: Date;
-  status: string;
+  status: StepStatusEnum;
   dossierId: string;
   stepId: string;
 }

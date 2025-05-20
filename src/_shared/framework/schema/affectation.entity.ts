@@ -8,6 +8,8 @@ import { TaskEntity } from './task.entity';
 import { Dossier } from 'domain/model/dossier.model';
 import { Staff } from 'domain/model/staff.model';
 import { ITask } from 'domain/model/task.model';
+import { DossierStep } from 'domain/model/dossier-step.model';
+import { DossierStepEntity } from './dossier-step.entity';
 
 @ObjectType()
 @Entity('affectations')
@@ -24,9 +26,9 @@ export class AffectationEntity extends ATimestamp implements IAffectation {
   @Column({ nullable: true })
   closedAt?: Date;
 
-  @Field(() => DossierEntity)
-  @ManyToOne(() => DossierEntity, dossier => dossier.affectations, { eager: true })
-  dossier: Dossier;
+  @Field(() => DossierStepEntity)
+  @ManyToOne(() => DossierStepEntity, dossier => dossier.affectations, { eager: true })
+  dossierStep: DossierStep;
 
   @Field(() => StaffEntity)
   @ManyToOne(() => StaffEntity, staff => staff.affectations, { eager: true })
@@ -34,5 +36,5 @@ export class AffectationEntity extends ATimestamp implements IAffectation {
 
   @Field(() => TaskEntity, { nullable: true })
   @ManyToOne(() => TaskEntity, { nullable: true })
-  Task: ITask;
+  task: ITask;
 }
