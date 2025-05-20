@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateTaskDTO, UpdateTaskDTO } from './task.input.dto';
 import { ITaskService } from './task.service.interface';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Step tasks management')
 @Controller('tasks')
 export class TaskController {

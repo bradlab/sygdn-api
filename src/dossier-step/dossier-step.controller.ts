@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateDossierStepDTO, UpdateDossierStepDTO } from './dossier-step.input.dto';
 import { IDossierStepService } from './dossier-step.service.interface';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('DossierStep')
 @Controller('dossier.steps')
 export class DossierStepController {

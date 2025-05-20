@@ -1,11 +1,12 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards, Query } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IDossierService } from './dossier.service.interface';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
 import { DossierClientFilterDTO } from './dossier-client-filter.input';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Dossier management')
 @Controller('dossiers')
 export class DossierController {

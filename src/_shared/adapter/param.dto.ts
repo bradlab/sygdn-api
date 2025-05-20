@@ -31,7 +31,7 @@ export class IDsBodyDTO implements IIDsParamDTO {
   })
   @IsString({ each: true })
   @IsUUID(undefined, { each: true })
-  ids?: string[];
+  ids: string[];
 }
 
 export class IDsParamDTO extends PartialType(IDsBodyDTO) {}

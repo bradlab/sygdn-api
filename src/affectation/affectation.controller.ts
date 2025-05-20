@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { AffectationService } from './affectation.service';
 import { GetUser } from 'adapter/decorator';
 import { StaffGuard } from 'adapter/guard/auth.guard';
@@ -8,6 +8,7 @@ import { CreateAffectationDTO, UpdateAffectationDTO } from './affectation.input.
 import { IAffectationService } from './affectation.service.interface';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Affectation management')
 @Controller('affectations')
 export class AffectationController {

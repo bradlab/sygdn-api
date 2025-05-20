@@ -1,10 +1,11 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IStatistiqueService } from './statistique.service.interface';
 import { StatistiqueQueryDto } from './statistique.query.dto';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Statistiques')
 @Controller('statistiques')
 export class StatistiqueController {

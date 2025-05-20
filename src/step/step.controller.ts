@@ -1,11 +1,11 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { StepService } from './step.service';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateStepDTO, UpdateStepDTO } from './step.input.dto';
 import { IStepService } from './step.service.interface';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Step management')
 @Controller('steps')
 export class StepController {
