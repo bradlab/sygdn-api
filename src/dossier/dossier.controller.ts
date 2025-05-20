@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { IDossierService } from './dossier.service.interface';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
+import { DossierClientFilterDTO } from './dossier-client-filter.input';
 
 @UseGuards(StaffGuard)
 @ApiTags('Dossier management')
@@ -29,6 +30,13 @@ export class DossierController {
   @ApiResponse({ status: 200, description: 'Liste des dossiers.' })
   async findAll() {
     return this.dossierService.fetchAll();
+  }
+
+  @Get('by-client-with-details')
+  @ApiOperation({ summary: 'Récupérer tous les dossiers d\'un client avec étapes, tâches et commentaires filtrés' })
+  @ApiResponse({ status: 200, description: 'Dossiers détaillés paginés.' })
+  async findAllByClientWithDetails(@Body() filter: DossierClientFilterDTO) {
+    return this.dossierService.findAllByClientWithDetails(filter);
   }
 
   @Patch()

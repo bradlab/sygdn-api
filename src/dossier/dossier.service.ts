@@ -65,4 +65,33 @@ export class DossierService implements IDossierService {
       throw error;
     }
   }
+
+  async findAllByClientWithDetails(filter: {
+    clientId: string;
+    staffId?: string;
+    status?: string;
+    page?: number;
+    pageSize?: number;
+    [key: string]: any;
+  }): Promise<any> {
+    const { clientId, staffId, status, page = 1, pageSize = 10, ...rest } = filter;
+    const qb = this.dbRepository.dossiers['_repository'].createQueryBuilder('dossier');
+    qb.leftJoinAndSelect('dossier.steps', 'step')
+      .leftJoinAndSelect('step.tasks', 'task')
+      .leftJoinAndSelect('dossier.comments', 'comment');
+    qb.where('dossier.domain = :clientId', { clientId });
+    if (status) qb.andWhere('dossier.status = :status', { status });
+    if (staffId) qb.andWhere('comment.staff = :staffId', { staffId });
+    // Pagination
+    qb.skip((page - 1) * pageSize).take(pageSize);
+    // Ajout d'autres filtres dynamiques si besoin
+    for (const [key, value] of Object.entries(rest)) {
+      if (value !== undefined) {
+        qb.andWhere(`dossier.${key} = :${key}`, { [key]: value });
+      }
+    }
+    // Exécution
+    const [items, total] = await qb.getManyAndCount();
+    return { items, total, page, pageSize };
+  }
 }
