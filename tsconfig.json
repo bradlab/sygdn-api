@@ -28,7 +28,11 @@
       "framework": ["./src/_shared/framework"],
       "framework/*": ["./src/_shared/framework/*"],
       "auth/*": ["./src/auth/*"],
-      "user/*": ["./src/user/*"]
+      "user/*": ["./src/user/*"],
+      "step/*": ["./src/step/*"],
+      "affectation/*": ["./src/affectation/*"],
+      "dossier/*": ["./src/dossier/*"],
+      "comment/*": ["./src/comment/*"]
     }
   }
 }
