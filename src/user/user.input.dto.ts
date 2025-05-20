@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { BasicPersonnalInfoDTO } from 'adapter/param.dto';
 import { RoleEnum } from 'app/enum';
-import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsString, IsUUID } from 'class-validator';
 
 export class UserAccoutDTO extends BasicPersonnalInfoDTO {
   @ApiProperty({ type: String, format: 'binary', required: false })
@@ -13,21 +13,19 @@ export class UserAccoutDTO extends BasicPersonnalInfoDTO {
     description: 'The role of the user',
   })
   @IsString()
-  @IsEnum({enum: RoleEnum})
+  @IsEnum(RoleEnum)
   role: RoleEnum;
   
   @ApiProperty({
     type: String,
   })
   @IsString()
-  @IsNotEmpty()
   degree: string;
 }
 
 export class RegisterUserDTO extends UserAccoutDTO {
   @ApiProperty({
     type: String,
-    name: 'password',
   })
   @IsString()
   password: string;
