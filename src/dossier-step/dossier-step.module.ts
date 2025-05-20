@@ -3,9 +3,11 @@ import { DossierStepService } from './dossier-step.service';
 import { DossierStepResolver } from './dossier-step.resolver';
 import { UserModule } from 'user/user.module';
 import { IDossierStepService } from './dossier-step.service.interface';
+import { DossierStepController } from './dossier-step.controller';
 
 @Module({
   imports: [UserModule],
+    controllers: [DossierStepController],
     providers: [
       { provide: IDossierStepService, useClass: DossierStepService },
       DossierStepResolver,
