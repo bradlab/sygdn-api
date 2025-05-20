@@ -15,9 +15,10 @@ import { UserModule } from 'user/user.module';
 import { DomainModule } from './domain/domain.module';
 import { DirectiveLocation, GraphQLDirective } from 'graphql';
 import { GqlThrottlerGuard } from 'adapter/guard/throtter.guard';
+import { StepModule } from 'step/step.module';
 
 @Module({
-  imports: [UserModule, DomainModule],
+  imports: [UserModule, DomainModule, StepModule],
   controllers: [AppController],
   providers: [AppService],
 })

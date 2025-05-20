@@ -17,6 +17,10 @@
     "^domain/(.*)$": "<rootDir>/../src/_shared/domain/$1",
     "^util/(.*)$": "<rootDir>/../src/_shared/util/$1",
     "^auth/(.*)$": "<rootDir>/../src/auth/$1",
-    "^user/(.*)$": "<rootDir>/../src/user/$1"
+    "^user/(.*)$": "<rootDir>/../src/user/$1",
+    "^step/(.*)$": "<rootDir>/../src/step/$1",
+    "^affectation/(.*)$": "<rootDir>/../src/affectation/$1",
+    "^dossier/(.*)$": "<rootDir>/../src/dossier/$1",
+    "^comment/(.*)$": "<rootDir>/../src/comment/$1"
   }
 }
