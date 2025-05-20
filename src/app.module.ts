@@ -21,6 +21,7 @@ import { DossierStepModule } from 'dossier-step/dossier-step.module';
 import { TaskModule } from 'task/task.module';
 import { AffectationModule } from 'affectation/affectation.module';
 import { CommentModule } from 'comment/comment.module';
+import { StatistiqueModule } from './statistique/statistique.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CommentModule } from 'comment/comment.module';
     TaskModule,
     AffectationModule,
     CommentModule,
+    StatistiqueModule,
   ],
   controllers: [AppController],
   providers: [AppService],

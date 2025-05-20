@@ -3,7 +3,9 @@
 import { In, ObjectLiteral, Repository } from 'typeorm';
 import { IGenericRepository } from 'domain/abstract';
 
-export class DBGenericRepository<T extends ObjectLiteral> implements IGenericRepository<T> {
+export class DBGenericRepository<T extends ObjectLiteral>
+  implements IGenericRepository<T>
+{
   private _repository: Repository<T>;
 
   constructor(repository: Repository<T>) {
@@ -18,9 +20,39 @@ export class DBGenericRepository<T extends ObjectLiteral> implements IGenericRep
     return this._repository.find({ ...options });
   }
 
+  findAndCount(options: any): Promise<[T[], number]> {
+    return this._repository.findAndCount({ ...options });
+  }
+
+  count(options: any): Promise<number> {
+    return this._repository.count({ ...options });
+  }
+
+  countBy(options: any): Promise<number> {
+    return this._repository.countBy({ ...options });
+  }
+
+  async sum(field: any, options?: any): Promise<number> {
+    return await  this._repository.sum(field, options) ?? 0;
+  }
+
+  async average(field: any, options?: any): Promise<number> {
+    return await  this._repository.average(field, options) ?? 0;
+  }
+
+  async min(field: any, options?: any): Promise<number> {
+    return await  this._repository.minimum(field, options) ?? 0;
+  }
+
+  async max(field: any, options?: any): Promise<number> {
+    return await  this._repository.maximum(field, options) ?? 0;
+  }
+
   async findOneByID(id: string, options?: any): Promise<T> {
     options = { ...options, id };
-    return await this._repository.findOne({ where: { ...options } }) as unknown as T;
+    return (await this._repository.findOne({
+      where: { ...options },
+    })) as unknown as T;
   }
 
   async findByIds(ids: string[], options?: any): Promise<T[]> {
