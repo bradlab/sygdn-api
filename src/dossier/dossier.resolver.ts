@@ -6,6 +6,7 @@ import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { IDossierService } from './dossier.service.interface';
 import { DossierEntity } from 'framework/schema/dossier.entity';
+import { DossierClientFilterDTO } from './dossier-client-filter.input';
 
 @ApiTags('Dossier management')
 @ApiBearerAuth()
@@ -37,5 +38,12 @@ export class DossierResolver {
   @Mutation(() => Boolean)
   async removeDossier(@Args('id', { type: () => ID }) id: string): Promise<boolean> {
     return this.dossierService.remove(id);
+  }
+
+  @Query(() => Object, { name: 'dossiersByClientWithDetails' })
+  async dossiersByClientWithDetails(
+    @Args('filter') filter: DossierClientFilterDTO
+  ): Promise<any> {
+    return this.dossierService.findAllByClientWithDetails(filter);
   }
 }

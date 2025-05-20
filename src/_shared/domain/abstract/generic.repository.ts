@@ -19,6 +19,27 @@ export abstract class IGenericRepository<T> {
 
   abstract find(options?: RepoParam<T>): Promise<T[]>;
 
+  // Méthode pour récupérer des entités avec un comptage
+  abstract findAndCount(options?: RepoParam<T>): Promise<[T[], number]>; // [list of entities, total count]
+
+  // Méthode pour obtenir le nombre d'entités correspondant à des critères
+  abstract count(options?: RepoParam<T>): Promise<number>;
+
+  // Méthode pour obtenir le nombre d'entités correspondant à des critères spécifiques
+  abstract countBy(options?: DeepQueryType<T>): Promise<number>;
+
+  // Somme d'un champ spécifique
+  abstract sum(field: keyof T, options?: RepoParam<T>): Promise<number>;
+
+  // Moyenne d'un champ spécifique
+  abstract average(field: keyof T, options?: RepoParam<T>): Promise<number>;
+
+  // Valeur minimale d'un champ spécifique
+  abstract min(field: keyof T, options?: RepoParam<T>): Promise<number>;
+
+  // Valeur maximale d'un champ spécifique
+  abstract max(field: keyof T, options?: RepoParam<T>): Promise<number>;
+
   abstract findOneByID(id: string, options?: RepoParam<T>): Promise<T>;
 
   abstract findByIds(ids: string[], options?: DeepQueryType<T>): Promise<T[]>;

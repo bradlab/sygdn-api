@@ -21,6 +21,7 @@ import { DossierStepModule } from 'dossier-step/dossier-step.module';
 import { TaskModule } from 'task/task.module';
 import { AffectationModule } from 'affectation/affectation.module';
 import { CommentModule } from 'comment/comment.module';
+import { StatistiqueModule } from './statistique/statistique.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { CommentModule } from 'comment/comment.module';
     TaskModule,
     AffectationModule,
     CommentModule,
+    StatistiqueModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -100,9 +102,9 @@ export class IAppModule {}
       password: process.env.DB_PASSWORD,
       logger: 'advanced-console',
       logging: ['error'],
-      synchronize: true,
+      synchronize: process.env.NODE_ENV != 'prod',
       autoLoadEntities: true,
-      // ssl: true,
+      ssl: process.env.NODE_ENV === 'test' || process.env.NODE_ENV === 'prod',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
 
