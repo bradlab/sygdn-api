@@ -3,9 +3,11 @@ import { AffectationService } from './affectation.service';
 import { AffectationResolver } from './affectation.resolver';
 import { UserModule } from 'user/user.module';
 import { IAffectationService } from './affectation.service.interface';
+import { AffectationController } from './affectation.controller';
 
 @Module({
   imports: [UserModule],
+    controllers: [AffectationController],
     providers: [
       { provide: IAffectationService, useClass: AffectationService },
       AffectationResolver,
