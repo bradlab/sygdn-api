@@ -5,30 +5,31 @@ import { Dossier } from 'domain/model/dossier.model';
 import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { IDossierService } from './dossier.service.interface';
+import { DossierEntity } from 'framework/schema/dossier.entity';
 
 @ApiTags('Dossier management')
 @ApiBearerAuth()
-@Resolver(() => Dossier)
+@Resolver(() => DossierEntity)
 @UseGuards(StaffGuard)
 export class DossierResolver {
   constructor(private readonly dossierService: IDossierService) {}
 
-  @Query(() => [Dossier], { name: 'dossiers' })
+  @Query(() => [DossierEntity], { name: 'dossiers' })
   async fetchAll(): Promise<Dossier[]> {
     return this.dossierService.fetchAll();
   }
 
-  @Query(() => Dossier, { name: 'dossier', nullable: true })
+  @Query(() => DossierEntity, { name: 'dossier', nullable: true })
   async fetchOne(@Args('id', { type: () => ID }) id: string): Promise<Dossier> {
     return this.dossierService.fetchOne(id);
   }
 
-  @Mutation(() => Dossier)
+  @Mutation(() => DossierEntity)
   async createDossier(@Args('data') data: CreateDossierDTO): Promise<Dossier> {
     return this.dossierService.add(data);
   }
 
-  @Mutation(() => Dossier)
+  @Mutation(() => DossierEntity)
   async updateDossier(@Args('data') data: UpdateDossierDTO): Promise<Dossier> {
     return this.dossierService.edit(data);
   }

@@ -7,30 +7,31 @@ import { StaffGuard } from 'adapter/guard/auth.guard';
 import { GetUser } from 'adapter/decorator';
 import { Staff } from 'domain/model/staff.model';
 import { CreateAffectationDTO, UpdateAffectationDTO } from './affectation.input.dto';
+import { AffectationEntity } from 'framework/schema/affectation.entity';
 
 @ApiTags('Dossier Affectations')
 @ApiBearerAuth()
-@Resolver(() => Affectation)
+@Resolver(() => AffectationEntity)
 @UseGuards(StaffGuard)
 export class AffectationResolver {
   constructor(private readonly affectationService: IAffectationService) {}
 
-  @Query(() => [Affectation], { name: 'affectations' })
+  @Query(() => [AffectationEntity], { name: 'affectations' })
   async fetchAll(): Promise<Affectation[]> {
     return this.affectationService.fetchAll();
   }
 
-  @Query(() => Affectation, { name: 'affectation', nullable: true })
+  @Query(() => AffectationEntity, { name: 'affectation', nullable: true })
   async fetchOne(@Args('id', { type: () => ID }) id: string): Promise<Affectation> {
     return this.affectationService.fetchOne(id);
   }
 
-  @Mutation(() => Affectation)
+  @Mutation(() => AffectationEntity)
   async createAffectation(@GetUser() user: Staff, @Args('data') data: CreateAffectationDTO): Promise<Affectation> {
     return this.affectationService.add(user, data);
   }
 
-  @Mutation(() => Affectation)
+  @Mutation(() => AffectationEntity)
   async updateAffectation(@Args('data') data: UpdateAffectationDTO): Promise<Affectation> {
     return this.affectationService.edit(data);
   }

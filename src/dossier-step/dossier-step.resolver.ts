@@ -5,30 +5,31 @@ import { DossierStep } from 'domain/model/dossier-step.model';
 import { CreateDossierStepDTO, UpdateDossierStepDTO } from './dossier-step.input.dto';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { IDossierStepService } from './dossier-step.service.interface';
+import { DossierStepEntity } from 'framework/schema/dossier-step.entity';
 
 @ApiTags('DossierStep')
 @ApiBearerAuth()
-@Resolver(() => DossierStep)
+@Resolver(() => DossierStepEntity)
 @UseGuards(StaffGuard)
 export class DossierStepResolver {
   constructor(private readonly dossierStepService: IDossierStepService) {}
 
-  @Query(() => [DossierStep], { name: 'dossierSteps' })
+  @Query(() => [DossierStepEntity], { name: 'dossierSteps' })
   async fetchAll(): Promise<DossierStep[]> {
     return this.dossierStepService.fetchAll();
   }
 
-  @Query(() => DossierStep, { name: 'dossierStep', nullable: true })
+  @Query(() => DossierStepEntity, { name: 'dossierStep', nullable: true })
   async fetchOne(@Args('id', { type: () => ID }) id: string): Promise<DossierStep> {
     return this.dossierStepService.fetchOne(id);
   }
 
-  @Mutation(() => DossierStep)
+  @Mutation(() => DossierStepEntity)
   async createDossierStep(@Args('data') data: CreateDossierStepDTO): Promise<DossierStep> {
     return this.dossierStepService.add(data);
   }
 
-  @Mutation(() => DossierStep)
+  @Mutation(() => DossierStepEntity)
   async updateDossierStep(@Args('data') data: UpdateDossierStepDTO): Promise<DossierStep> {
     return this.dossierStepService.edit(data);
   }
