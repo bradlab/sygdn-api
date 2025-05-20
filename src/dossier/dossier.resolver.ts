@@ -40,7 +40,7 @@ export class DossierResolver {
     return this.dossierService.remove(id);
   }
 
-  @Query(() => Object, { name: 'dossiersByClientWithDetails' })
+  @Query(() => DossierEntity, { name: 'dossiersByClientWithDetails' })
   async dossiersByClientWithDetails(
     @Args('filter') filter: DossierClientFilterDTO
   ): Promise<any> {
