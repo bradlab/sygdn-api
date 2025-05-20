@@ -5,9 +5,9 @@ import { IStatistiqueService } from './statistique.service.interface';
 import { UserModule } from 'user/user.module';
 
 @Module({
-    imports: [UserModule],
-controllers: [StatistiqueController],
-  providers: [{provide: IStatistiqueService, useClass: StatistiqueService}],
-  exports: [StatistiqueService],
+  imports: [UserModule],
+  controllers: [StatistiqueController],
+  providers: [{ provide: IStatistiqueService, useClass: StatistiqueService },],
+  exports: [IStatistiqueService],
 })
 export class StatistiqueModule {}
