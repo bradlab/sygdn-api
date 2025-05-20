@@ -16,9 +16,23 @@ import { DomainModule } from './domain/domain.module';
 import { DirectiveLocation, GraphQLDirective } from 'graphql';
 import { GqlThrottlerGuard } from 'adapter/guard/throtter.guard';
 import { StepModule } from 'step/step.module';
+import { DossierModule } from 'dossier/dossier.module';
+import { DossierStepModule } from 'dossier-step/dossier-step.module';
+import { TaskModule } from 'task/task.module';
+import { AffectationModule } from 'affectation/affectation.module';
+import { CommentModule } from 'comment/comment.module';
 
 @Module({
-  imports: [UserModule, DomainModule, StepModule],
+  imports: [
+    UserModule,
+    DomainModule,
+    StepModule,
+    DossierModule,
+    DossierStepModule,
+    TaskModule,
+    AffectationModule,
+    CommentModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -32,7 +46,7 @@ export class IAppModule {}
       isGlobal: true,
     }),
     WinstonModule.forRoot({
-      format: winston.format.combine( 
+      format: winston.format.combine(
         winston.format.timestamp(),
         winston.format.json(),
       ),
@@ -91,7 +105,7 @@ export class IAppModule {}
       // ssl: true,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
-    
+
     IAppModule,
     SeedsModule,
     // ThrottlerModule.forRoot([

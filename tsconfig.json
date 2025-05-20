@@ -32,7 +32,9 @@
       "step/*": ["./src/step/*"],
       "affectation/*": ["./src/affectation/*"],
       "dossier/*": ["./src/dossier/*"],
-      "comment/*": ["./src/comment/*"]
+      "comment/*": ["./src/comment/*"],
+      "task/*": ["./src/task/*"],
+      "dossier-step/*": ["./src/dossier-step/*"],
     }
   }
 }

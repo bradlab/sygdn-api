@@ -7,7 +7,7 @@ export class Step extends ITimestamp {
   description?: string;
   duration: number; // en jours
   order: number; // ordre de passage du dossier
-  domain: IDomain; // relation avec le domaine
+  domain: IDomain;
 }
 
 export interface OStep extends Partial<Step> {}

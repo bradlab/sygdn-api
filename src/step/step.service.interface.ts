@@ -15,9 +15,9 @@ export interface IUpdateStepDTO extends Partial<ICreateStepDTO> {
 }
 
 export abstract class IStepService {
-  abstract add(input: ICreateStepDTO): Promise<Step>;
+  abstract add(data: ICreateStepDTO): Promise<Step>;
   abstract fetchOne(id: string): Promise<Step>;
   abstract fetchAll(): Promise<Step[]>;
-  abstract edit(input: IUpdateStepDTO): Promise<Step>;
+  abstract edit(data: IUpdateStepDTO): Promise<Step>;
   abstract remove(id: string): Promise<boolean>;
 }
