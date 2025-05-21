@@ -3,7 +3,7 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Affectation } from 'domain/model/affectation.model';
 import { IAffectationService } from './affectation.service.interface';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { GetUser } from 'adapter/decorator';
 import { Staff } from 'domain/model/staff.model';
 import { CreateAffectationDTO, UpdateAffectationDTO } from './affectation.input.dto';
@@ -12,7 +12,7 @@ import { AffectationEntity } from 'framework/schema/affectation.entity';
 @ApiTags('Dossier Affectations')
 @ApiBearerAuth()
 @Resolver(() => AffectationEntity)
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 export class AffectationResolver {
   constructor(private readonly affectationService: IAffectationService) {}
 

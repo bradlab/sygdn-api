@@ -2,9 +2,9 @@ import { Resolver, Query, Args } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { IStatistiqueService } from './statistique.service.interface';
 import { StatistiqueQueryDto } from './statistique.query.dto';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 @Resolver('Statistiques')
 export class StatistiqueResolver {
   constructor(private readonly stats: IStatistiqueService) {}

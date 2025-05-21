@@ -3,7 +3,7 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Dossier } from 'domain/model/dossier.model';
 import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { IDossierService } from './dossier.service.interface';
 import { DossierEntity } from 'framework/schema/dossier.entity';
 import { DossierClientFilterDTO } from './dossier-client-filter.input';
@@ -11,7 +11,7 @@ import { DossierClientFilterDTO } from './dossier-client-filter.input';
 @ApiTags('Dossier management')
 @ApiBearerAuth()
 @Resolver(() => DossierEntity)
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 export class DossierResolver {
   constructor(private readonly dossierService: IDossierService) {}
 

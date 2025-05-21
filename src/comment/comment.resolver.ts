@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IComment } from 'domain/model/comment.model';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { CreateCommentDTO, UpdateCommentDTO } from './comment.input.dto';
 import { ICommentService } from './comment.service.interface';
 import { CommentEntity } from 'framework/schema/comment.entity';
@@ -10,7 +10,7 @@ import { CommentEntity } from 'framework/schema/comment.entity';
 @ApiTags('User Comments')
 @ApiBearerAuth()
 @Resolver(() => CommentEntity)
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 export class CommentResolver {
   constructor(private readonly commentService: ICommentService) {}
 
