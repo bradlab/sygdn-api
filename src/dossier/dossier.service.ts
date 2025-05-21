@@ -1,5 +1,14 @@
-import { Injectable, Logger, NotFoundException, ConflictException } from '@nestjs/common';
-import { IDossierService, ICreateDossierDTO, IUpdateDossierDTO } from './dossier.service.interface';
+import {
+  Injectable,
+  Logger,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
+import {
+  IDossierService,
+  ICreateDossierDTO,
+  IUpdateDossierDTO,
+} from './dossier.service.interface';
 import { Dossier } from 'domain/model/dossier.model';
 import { IDBRepository } from 'app/abstract/db.abstract';
 import { DossierFactory } from 'adapter/factory/dossier.factory';
@@ -9,13 +18,22 @@ export class DossierService implements IDossierService {
   private readonly logger = new Logger();
   constructor(private dbRepository: IDBRepository) {}
 
-  async add(input: ICreateDossierDTO): Promise<Dossier> {
+  async add(data: ICreateDossierDTO): Promise<Dossier> {
     try {
-      const existing = await this.dbRepository.dossiers.findOne({ where: { name: input.name, domain: input.domainId } });
-      if (existing) throw new ConflictException('Dossier with the same name already exists in this domain');
-      const domain = await this.dbRepository.domains.findOneByID(input.domainId);
+      const existing = await this.dbRepository.dossiers.findOne({
+        where: { name: data.name, domain: { id: data.domainId } },
+      });
+      if (existing)
+        throw new ConflictException(
+          'Dossier with the same name already exists in this domain',
+        );
+      const domain = await this.dbRepository.domains.findOneByID(
+        data.domainId,
+      );
       if (!domain) throw new NotFoundException('Domain not found');
-      return await this.dbRepository.dossiers.create(DossierFactory.create(input, domain));
+      return await this.dbRepository.dossiers.create(
+        DossierFactory.create(data, domain),
+      );
     } catch (error) {
       this.logger.error(error, 'ERROR::DossierService.add');
       throw error;
@@ -37,16 +55,16 @@ export class DossierService implements IDossierService {
     }
   }
 
-  async edit(input: IUpdateDossierDTO): Promise<Dossier> {
+  async edit(data: IUpdateDossierDTO): Promise<Dossier> {
     try {
-      const dossier = await this.dbRepository.dossiers.findOneByID(input.id);
+      const dossier = await this.dbRepository.dossiers.findOneByID(data.id);
       if (!dossier) throw new NotFoundException('Dossier not found');
       let domain = dossier.domain;
-      if (input.domainId && input.domainId !== (dossier.domain as any)?.id) {
-        domain = await this.dbRepository.domains.findOneByID(input.domainId);
+      if (data.domainId && data.domainId !== (dossier.domain as any)?.id) {
+        domain = await this.dbRepository.domains.findOneByID(data.domainId);
         if (!domain) throw new NotFoundException('Domain not found');
       }
-      const updated = { ...dossier, ...input, domain };
+      const updated = { ...dossier, ...data, domain };
       return this.dbRepository.dossiers.update(updated);
     } catch (error) {
       this.logger.error(error, 'ERROR::DossierService.edit');
@@ -74,8 +92,16 @@ export class DossierService implements IDossierService {
     pageSize?: number;
     [key: string]: any;
   }): Promise<any> {
-    const { clientId, staffId, status, page = 1, pageSize = 10, ...rest } = filter;
-    const qb = this.dbRepository.dossiers['_repository'].createQueryBuilder('dossier');
+    const {
+      clientId,
+      staffId,
+      status,
+      page = 1,
+      pageSize = 10,
+      ...rest
+    } = filter;
+    const qb =
+      this.dbRepository.dossiers['_repository'].createQueryBuilder('dossier');
     qb.leftJoinAndSelect('dossier.steps', 'step')
       .leftJoinAndSelect('step.tasks', 'task')
       .leftJoinAndSelect('dossier.comments', 'comment');
