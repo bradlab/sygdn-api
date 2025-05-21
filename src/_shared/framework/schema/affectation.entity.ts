@@ -18,8 +18,8 @@ export class AffectationEntity extends ATimestamp implements IAffectation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   report: string;
 
   @Field({ nullable: true })
@@ -33,6 +33,10 @@ export class AffectationEntity extends ATimestamp implements IAffectation {
   @Field(() => StaffEntity)
   @ManyToOne(() => StaffEntity, staff => staff.affectations, { eager: true })
   staff: Staff;
+
+  @Field(() => StaffEntity)
+  @ManyToOne(() => StaffEntity, staff => staff.affectations, { eager: true })
+  user: Staff;
 
   @Field(() => TaskEntity, { nullable: true })
   @ManyToOne(() => TaskEntity, { nullable: true })

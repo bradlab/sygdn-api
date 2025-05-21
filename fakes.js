@@ -1,3 +1,110 @@
+const STAFF_USER = [
+  {
+    "name": "Kossi Agbeko",
+    "phone": "+22890123456",
+    "sex": "MALE",
+    "email": "kossi.agbeko@example.com",
+    "address": "Lomé, Tokoin",
+    "country": "Togo",
+    "maritalStatus": "SINGLE",
+    "avatar": "avatar1.jpg",
+    "role": "ADMIN",
+    "degree": "Master en Droit Notarial",
+    "password": "SecurePass123!"
+  },
+  {
+    "name": "Amévi Lawson",
+    "phone": "+22890234567",
+    "sex": "FEMALE",
+    "email": "amevi.lawson@example.com",
+    "address": "Lomé, Bè",
+    "country": "Togo",
+    "maritalStatus": "MARRIED",
+    "avatar": "avatar2.jpg",
+    "role": "MANAGER",
+    "degree": "Licence en Droit Privé",
+    "password": "SecurePass456!"
+  },
+  {
+    "name": "Kodjo Mensah",
+    "phone": "+22890345678",
+    "sex": "MALE",
+    "email": "kodjo.mensah@example.com",
+    "address": "Kpalimé",
+    "country": "Togo",
+    "maritalStatus": "SINGLE",
+    "avatar": "avatar3.jpg",
+    "role": "DIRECTOR",
+    "degree": "Doctorat en Droit des Affaires",
+    "password": "SecurePass789!"
+  },
+  {
+    "name": "Adjowa Tchalla",
+    "phone": "+22890456789",
+    "sex": "FEMALE",
+    "email": "adjowa.tchalla@example.com",
+    "address": "Sokodé",
+    "country": "Togo",
+    "maritalStatus": "OTHER",
+    "avatar": "avatar4.jpg",
+    "role": "SECRETARY",
+    "degree": "BTS Assistant Juridique",
+    "password": "SecurePass321!"
+  },
+  {
+    "name": "Yawovi Amouzou",
+    "phone": "+22890567890",
+    "sex": "MALE",
+    "email": "yawovi.amouzou@example.com",
+    "address": "Lomé, Agoè",
+    "country": "Togo",
+    "maritalStatus": "MARRIED",
+    "avatar": "avatar5.jpg",
+    "role": "COLLEAGUE",
+    "degree": "Licence en Droit Civil",
+    "password": "SecurePass654!"
+  },
+  {
+    "name": "Afi Dossou",
+    "phone": "+22890678901",
+    "sex": "FEMALE",
+    "email": "afi.dossou@example.com",
+    "address": "Aného",
+    "country": "Togo",
+    "maritalStatus": "WIDOW",
+    "avatar": "avatar6.jpg",
+    "role": "MANAGER",
+    "degree": "Master en Droit des Contrats",
+    "password": "SecurePass987!"
+  },
+  {
+    "name": "Kokou Eklou",
+    "phone": "+22890789012",
+    "sex": "MALE",
+    "email": "kokou.eklou@example.com",
+    "address": "Kara",
+    "country": "Togo",
+    "maritalStatus": "MARRIED",
+    "avatar": "avatar7.jpg",
+    "role": "DIRECTOR",
+    "degree": "Diplôme de Notaire",
+    "password": "SecurePass147!"
+  },
+  {
+    "name": "Akouvi Gnassingbé",
+    "phone": "+22890890123",
+    "sex": "FEMALE",
+    "email": "akouvi.gnassingbe@example.com",
+    "address": "Lomé, Amoutiévé",
+    "country": "Togo",
+    "maritalStatus": "SINGLE",
+    "avatar": "avatar8.jpg",
+    "role": "SECRETARY",
+    "degree": "Licence Professionnelle en Techniques Notariales",
+    "password": "SecurePass258!"
+  }
+]
+
 const DOMAIN_PATRIMOINE_STEP = [
   {
     "name": "Analyse de la situation patrimoniale",

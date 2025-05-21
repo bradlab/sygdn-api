@@ -29,9 +29,9 @@ export abstract class StaffFactory {
     user.phone = data.phone;
     user.role = data.role;
     user.degree = data.degree;
+    user.sex = data.sex;
     user.maritalStatus = data.maritalStatus;
     user.name = data.name;
-    user.degree = data.degree;
     user.address = data.address;
     user.password = await HashFactory.hashPwd(data.password);
 

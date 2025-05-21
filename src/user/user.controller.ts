@@ -16,10 +16,8 @@ import {
   ApiBody,
   ApiResponse,
   ApiParam,
-  ApiConsumes,
   ApiQuery,
 } from '@nestjs/swagger';
-import { DataGenerator } from 'domain/generator/data.generator';
 import { IDParamDTO, IDsParamDTO } from 'adapter/param.dto';
 import { OUser } from 'domain/model/staff.model';
 import { IUserService } from './user.service.interface';
@@ -31,7 +29,7 @@ import { StaffGuard } from 'adapter/guard/auth.guard';
 @UseGuards(StaffGuard)
 @ApiTags('Staff or Admin')
 @ApiBearerAuth()
-@Controller('staff')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: IUserService) {}
 
@@ -55,13 +53,11 @@ export class UserController {
   })
   @ApiQuery({
     type: String,
-    name: 'email',
     description: 'email of the auth staff',
     required: false,
   })
   @ApiQuery({
     type: String,
-    name: 'phone',
     description: 'phone number of the auth staff',
     required: false,
   })
