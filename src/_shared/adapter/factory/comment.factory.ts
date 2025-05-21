@@ -16,6 +16,8 @@ export class CommentFactory {
   }
 
   static getComment(comment: IComment): OComment {
+        if (!comment) return undefined as unknown as OComment;
+    
     return {
       id: comment.id,
       content: comment.content,

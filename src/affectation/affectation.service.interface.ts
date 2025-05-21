@@ -4,7 +4,7 @@ import { Staff } from 'domain/model/staff.model';
 export interface ICreateAffectationDTO {
   report: string;
   closedAt?: Date;
-  dossierId: string;
+  dossierStepId: string;
   staffId: string;
   taskId?: string;
   
@@ -16,9 +16,9 @@ export interface IUpdateAffectationDTO extends Partial<ICreateAffectationDTO> {
 }
 
 export abstract class IAffectationService {
-  abstract add(user: Staff, data: ICreateAffectationDTO): Promise<Affectation>;
+  abstract add(user: Staff, data: ICreateAffectationDTO): Promise<boolean>;
   abstract fetchOne(id: string): Promise<Affectation>;
   abstract fetchAll(): Promise<Affectation[]>;
-  abstract edit(data: IUpdateAffectationDTO): Promise<Affectation>;
+  abstract edit(user: Staff, data: IUpdateAffectationDTO): Promise<Affectation>;
   abstract remove(id: string): Promise<boolean>;
 }

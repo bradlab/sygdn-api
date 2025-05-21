@@ -6,7 +6,7 @@ import { IAffectationService } from './affectation.service.interface';
 import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { GetUser } from 'adapter/decorator';
 import { Staff } from 'domain/model/staff.model';
-import { CreateAffectationDTO, UpdateAffectationDTO } from './affectation.input.dto';
+import { CreateAffectationDTO, GqlUpdateAffectationDTO } from './affectation.input.dto';
 import { AffectationEntity } from 'framework/schema/affectation.entity';
 
 @ApiTags('Dossier Affectations')
@@ -27,13 +27,13 @@ export class AffectationResolver {
   }
 
   @Mutation(() => AffectationEntity)
-  async createAffectation(@GetUser() user: Staff, @Args('data') data: CreateAffectationDTO): Promise<Affectation> {
+  async createAffectation(@GetUser() user: Staff, @Args('data') data: CreateAffectationDTO): Promise<boolean> {
     return this.affectationService.add(user, data);
   }
 
   @Mutation(() => AffectationEntity)
-  async updateAffectation(@Args('data') data: UpdateAffectationDTO): Promise<Affectation> {
-    return this.affectationService.edit(data);
+  async updateAffectation(@GetUser() user: Staff, @Args('data') data: GqlUpdateAffectationDTO): Promise<Affectation> {
+    return this.affectationService.edit(user, data);
   }
 
   @Mutation(() => Boolean)

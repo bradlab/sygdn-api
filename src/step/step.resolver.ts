@@ -1,5 +1,5 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
-import { CreateStepDTO, UpdateStepDTO } from './step.input.dto';
+import { CreateStepDTO, GqlUpdateStepDTO } from './step.input.dto';
 import { Step } from 'domain/model/step.model';
 import { StepEntity } from 'framework/schema/step.entity';
 import { IStepService } from './step.service.interface';
@@ -32,7 +32,7 @@ export class StepResolver {
   @Mutation(() => StepEntity)
   async updateStep(
     @Args('id') id: string,
-    @Args('input') data: UpdateStepDTO,
+    @Args('input') data: GqlUpdateStepDTO,
   ): Promise<Step> {
     return this.stepService.edit(data);
   }

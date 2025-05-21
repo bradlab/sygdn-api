@@ -41,6 +41,7 @@ export class StepService implements IStepService {
     try {
       return await this.dbRepository.steps.find({
         relations: { domain: true },
+        order: {createdAt: 'DESC'}
       });
     } catch (error) {
       this.logger.error(error, 'ERROR::StepService.fetchAll');

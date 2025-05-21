@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Dossier } from 'domain/model/dossier.model';
-import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
+import { CreateDossierDTO, GqlUpdateDossierDTO } from './dossier.input.dto';
 import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { IDossierService } from './dossier.service.interface';
 import { DossierEntity } from 'framework/schema/dossier.entity';
@@ -31,7 +31,7 @@ export class DossierResolver {
   }
 
   @Mutation(() => DossierEntity)
-  async updateDossier(@Args('data') data: UpdateDossierDTO): Promise<Dossier> {
+  async updateDossier(@Args('data') data: GqlUpdateDossierDTO): Promise<Dossier> {
     return this.dossierService.edit(data);
   }
 

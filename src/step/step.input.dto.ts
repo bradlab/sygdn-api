@@ -1,5 +1,5 @@
-import { InputType, Field, Int, ID, PartialType } from '@nestjs/graphql';
-import { ApiProperty  } from '@nestjs/swagger';
+import { InputType, Field, ID, Int, PartialType as GqlPartialType } from '@nestjs/graphql';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, IsUUID, IsNumber, Min } from 'class-validator';
 import { ICreateStepDTO } from './step.service.interface';
 
@@ -34,8 +34,14 @@ export class CreateStepDTO implements ICreateStepDTO {
   domainId: string;
 }
 
-@InputType()
 export class UpdateStepDTO extends PartialType(CreateStepDTO) {
+  @ApiProperty({ description: 'ID du step' })
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+}
+@InputType()
+export class GqlUpdateStepDTO extends GqlPartialType(CreateStepDTO) {
   @ApiProperty({ description: 'ID du step' })
   @Field(() => ID)
   @IsUUID()

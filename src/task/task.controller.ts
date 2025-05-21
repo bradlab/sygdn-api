@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateTaskDTO, UpdateTaskDTO } from './task.input.dto';
+import { CreateTaskDTO, GqlUpdateTaskDTO, UpdateTaskDTO } from './task.input.dto';
 import { ITaskService } from './task.service.interface';
 
 @UseGuards(StaffGuard)
@@ -32,7 +32,7 @@ export class TaskController {
     return this.taskService.fetchAll();
   }
 
-  @Patch(':id')
+  @Patch()
   @ApiOperation({ summary: 'Modifier une tâche' })
   @ApiResponse({ status: 200, description: 'Tâche modifiée.' })
   async update(@Body() dto: UpdateTaskDTO) {

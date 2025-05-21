@@ -1,6 +1,6 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
-import { CreateDomainDTO, UpdateDomainDTO } from './domain.input.dto';
+import { CreateDomainDTO, GqlUpdateDomainDTO } from './domain.input.dto';
 import { DomainEntity } from 'framework/schema/domain.entity';
 import { ODomain } from 'domain/model/domain.model';
 import { DomainFactory } from 'adapter/factory/domain.factory';
@@ -35,7 +35,7 @@ export class DomainResolver {
 
   @Mutation(() => DomainEntity, { nullable: true })
   async updateDomain(
-    @Args('updateDomainData') data: UpdateDomainDTO, // Argument Input Type pour les données de mise à jour
+    @Args('updateDomainData') data: GqlUpdateDomainDTO, // Argument Input Type pour les données de mise à jour
   ): Promise<DomainEntity | undefined> {
     return this.domainService.edit(data);
   }

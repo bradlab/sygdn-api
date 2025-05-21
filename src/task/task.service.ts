@@ -32,7 +32,7 @@ export class TaskService implements ITaskService {
 
   async fetchAll(): Promise<ITask[]> {
     try {
-      return await this.dbRepository.tasks.find();
+      return await this.dbRepository.tasks.find({order: {createdAt: 'DESC'}});
     } catch (error) {
       this.logger.error(error, 'ERROR::TaskService.fetchAll');
       throw error;

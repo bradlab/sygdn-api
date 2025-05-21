@@ -30,7 +30,7 @@ export class CommentService implements ICommentService {
 
   async fetchAll(): Promise<IComment[]> {
     try {
-      return await this.dbRepository.comments.find();
+      return await this.dbRepository.comments.find({order: {createdAt: 'DESC'}});
     } catch (error) {
       this.logger.error(error, 'ERROR::CommentService.fetchAll');
       throw error;

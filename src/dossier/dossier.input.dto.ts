@@ -1,5 +1,5 @@
-import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
+import { InputType, Field, ID, PartialType as GqlPartialType } from '@nestjs/graphql';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 // import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ICreateDossierDTO, IUpdateDossierDTO } from './dossier.service.interface';
@@ -30,8 +30,19 @@ export class CreateDossierDTO implements ICreateDossierDTO {
   domainId: string;
 }
 
-@InputType()
 export class UpdateDossierDTO extends PartialType(CreateDossierDTO) implements IUpdateDossierDTO {
+  @ApiProperty()
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+
+  @ApiProperty({ required: false })
+  @Field({ nullable: true })
+  @IsOptional()
+  closedAt?: Date;
+}
+@InputType()
+export class GqlUpdateDossierDTO extends GqlPartialType(CreateDossierDTO) implements IUpdateDossierDTO {
   @ApiProperty()
   @Field(() => ID)
   @IsUUID()

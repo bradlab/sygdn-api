@@ -54,7 +54,7 @@ export class DossierService implements IDossierService {
 
   async fetchAll(): Promise<Dossier[]> {
     try {
-      return await this.dbRepository.dossiers.find();
+      return await this.dbRepository.dossiers.find({order: {createdAt: 'DESC'}});
     } catch (error) {
       this.logger.error(error, 'ERROR::DossierService.fetchAll');
       throw error;

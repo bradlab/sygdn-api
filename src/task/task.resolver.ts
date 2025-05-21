@@ -2,7 +2,7 @@ import { UseGuards } from '@nestjs/common';
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ITask } from 'domain/model/task.model';
-import { CreateTaskDTO, UpdateTaskDTO } from './task.input.dto';
+import { CreateTaskDTO, GqlUpdateTaskDTO } from './task.input.dto';
 import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { ITaskService } from './task.service.interface';
 import { TaskEntity } from 'framework/schema/task.entity';
@@ -30,7 +30,7 @@ export class TaskResolver {
   }
 
   @Mutation(() => TaskEntity)
-  async updateTask(@Args('data') data: UpdateTaskDTO): Promise<ITask> {
+  async updateTask(@Args('data') data: GqlUpdateTaskDTO): Promise<ITask> {
     return this.taskService.edit(data);
   }
 

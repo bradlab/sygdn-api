@@ -67,7 +67,7 @@ export class DomainService implements IDomainService {
   async fetchAll(): Promise<IDomain[]> {
     try {
       return await this.dbRepository.domains.find({
-        order: { updatedAt: 'DESC' },
+        order: { createdAt: 'DESC' },
       });
     } catch (error) {
       this.logger.error(error, 'ERROR::DomainService.fetchAll');
