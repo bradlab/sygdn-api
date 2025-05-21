@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@n
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { IDomainService } from './domain.service.interface';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateDomainDTO, UpdateDomainDTO } from './domain.input.dto';
+import { CreateDomainDTO, GqlUpdateDomainDTO, UpdateDomainDTO } from './domain.input.dto';
 import { IDsBodyDTO } from 'adapter/param.dto';
 
 @UseGuards(StaffGuard)

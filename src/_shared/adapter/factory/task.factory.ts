@@ -13,6 +13,8 @@ export class TaskFactory {
   }
 
   static getTask(task: ITask): OTask {
+    if (!task) return undefined as unknown as OTask;
+    
     return {
         id: task.id,
         name: task.name,

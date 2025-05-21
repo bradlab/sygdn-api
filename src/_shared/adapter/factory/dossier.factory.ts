@@ -20,6 +20,7 @@ export class DossierFactory {
   }
 
   static getDossier(dossier: Dossier): ODossier {
+    if (!dossier) return undefined as unknown as ODossier;
     return {
       id: dossier.id,
       name: dossier.name,

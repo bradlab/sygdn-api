@@ -15,6 +15,7 @@ export class StepFactory {
   }
 
   static getStep(step: Step): OStep {
+    if (!step) return undefined as unknown as OStep;
     return {
       id: step.id,
       name: step.name,

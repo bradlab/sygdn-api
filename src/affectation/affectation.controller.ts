@@ -4,8 +4,9 @@ import { AffectationService } from './affectation.service';
 import { GetUser } from 'adapter/decorator';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { Staff } from 'domain/model/staff.model';
-import { CreateAffectationDTO, UpdateAffectationDTO } from './affectation.input.dto';
+import { CreateAffectationDTO, GqlUpdateAffectationDTO, UpdateAffectationDTO } from './affectation.input.dto';
 import { IAffectationService } from './affectation.service.interface';
+import { AffectationFactory } from 'adapter/factory/affectation.factory';
 
 @UseGuards(StaffGuard)
 @ApiBearerAuth()
@@ -18,28 +19,29 @@ export class AffectationController {
   @ApiOperation({ summary: 'Créer une affectation' })
   @ApiResponse({ status: 201, description: 'Affectation créée.' })
   async create(@GetUser() user: Staff, @Body() dto: CreateAffectationDTO) {
-    return this.affectationService.add(user, dto);
+    return await this.affectationService.add(user, dto);
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Récupérer une affectation par id' })
   @ApiResponse({ status: 200, description: 'Affectation trouvée.' })
   async findOne(@Param('id') id: string) {
-    return this.affectationService.fetchOne(id);
+    return AffectationFactory.getAffectation(await this.affectationService.fetchOne(id));
   }
 
   @Get()
   @ApiOperation({ summary: 'Lister toutes les affectations' })
   @ApiResponse({ status: 200, description: 'Liste des affectations.' })
   async findAll() {
-    return this.affectationService.fetchAll();
+    const list = await this.affectationService.fetchAll();
+    return list.map((affectation) => AffectationFactory.getAffectation(affectation));
   }
 
-  @Patch(':id')
+  @Patch()
   @ApiOperation({ summary: 'Modifier une affectation' })
   @ApiResponse({ status: 200, description: 'Affectation modifiée.' })
-  async update(@Body() dto: UpdateAffectationDTO) {
-    return this.affectationService.edit(dto);
+  async update(@GetUser() user: Staff, @Body() dto: UpdateAffectationDTO) {
+    return AffectationFactory.getAffectation(await this.affectationService.edit(user, dto));
   }
 
   @Delete(':id')

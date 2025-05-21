@@ -1,5 +1,5 @@
-import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
+import { InputType, Field, ID, PartialType as GqlPartialType } from '@nestjs/graphql';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsDateString, IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ICreateDossierStepDTO, IUpdateDossierStepDTO } from './dossier-step.service.interface';
 import { StepStatusEnum } from 'app/enum';
@@ -37,8 +37,14 @@ export class CreateDossierStepDTO implements ICreateDossierStepDTO {
   stepId: string;
 }
 
-@InputType()
 export class UpdateDossierStepDTO extends PartialType(CreateDossierStepDTO) implements IUpdateDossierStepDTO {
+  @ApiProperty()
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+}
+@InputType()
+export class GqlUpdateDossierStepDTO extends GqlPartialType(CreateDossierStepDTO) implements IUpdateDossierStepDTO {
   @ApiProperty()
   @Field(() => ID)
   @IsUUID()

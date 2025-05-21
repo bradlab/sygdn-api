@@ -3,7 +3,7 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IComment } from 'domain/model/comment.model';
 import { GqlAuthGuard } from 'adapter/guard/auth.guard';
-import { CreateCommentDTO, UpdateCommentDTO } from './comment.input.dto';
+import { CreateCommentDTO, GqlUpdateCommentDTO } from './comment.input.dto';
 import { ICommentService } from './comment.service.interface';
 import { CommentEntity } from 'framework/schema/comment.entity';
 
@@ -30,7 +30,7 @@ export class CommentResolver {
   }
 
   @Mutation(() => CommentEntity)
-  async updateComment(@Args('data') data: UpdateCommentDTO): Promise<IComment> {
+  async updateComment(@Args('data') data: GqlUpdateCommentDTO): Promise<IComment> {
     return this.commentService.edit(data);
   }
 

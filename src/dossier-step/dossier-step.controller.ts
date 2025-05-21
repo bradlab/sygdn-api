@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateDossierStepDTO, UpdateDossierStepDTO } from './dossier-step.input.dto';
+import { CreateDossierStepDTO, GqlUpdateDossierStepDTO, UpdateDossierStepDTO } from './dossier-step.input.dto';
 import { IDossierStepService } from './dossier-step.service.interface';
 
 @UseGuards(StaffGuard)
@@ -32,7 +32,7 @@ export class DossierStepController {
     return this.dossierStepService.fetchAll();
   }
 
-  @Patch(':id')
+  @Patch()
   @ApiOperation({ summary: 'Modifier un dossier-step' })
   @ApiResponse({ status: 200, description: 'DossierStep modifié.' })
   async update(@Body() dto: UpdateDossierStepDTO) {

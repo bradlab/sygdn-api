@@ -16,6 +16,7 @@ export class DossierStepFactory {
   }
 
   static getDossierStep(dossierStep: DossierStep): ODossierStep {
+    if (!dossierStep) return undefined as unknown as ODossierStep;
     return {
       id: dossierStep.id,
       startDate: dossierStep.startDate,

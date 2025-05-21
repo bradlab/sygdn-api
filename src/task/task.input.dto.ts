@@ -1,5 +1,5 @@
-import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
+import { InputType, Field, ID, PartialType as GqlPartialType } from '@nestjs/graphql';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ICreateTaskDTO, IUpdateTaskDTO } from './task.service.interface';
 
@@ -23,8 +23,14 @@ export class CreateTaskDTO implements ICreateTaskDTO {
   stepId: string;
 }
 
-@InputType()
 export class UpdateTaskDTO extends PartialType(CreateTaskDTO) implements IUpdateTaskDTO {
+  @ApiProperty()
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+}
+@InputType()
+export class GqlUpdateTaskDTO extends GqlPartialType(CreateTaskDTO) implements IUpdateTaskDTO {
   @ApiProperty()
   @Field(() => ID)
   @IsUUID()

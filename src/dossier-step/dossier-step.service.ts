@@ -57,7 +57,7 @@ export class DossierStepService implements IDossierStepService {
 
   async fetchAll(): Promise<DossierStep[]> {
     try {
-        return this.dbRepository.dossierSteps.find();
+        return this.dbRepository.dossierSteps.find({order: {createdAt: 'DESC'}});
     } catch (error) {
         this.logger.error(error, 'ERROR::DossierStepService.fetchAll');
         throw error;

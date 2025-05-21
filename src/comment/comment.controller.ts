@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateCommentDTO, UpdateCommentDTO } from './comment.input.dto';
+import { CreateCommentDTO, GqlUpdateCommentDTO, UpdateCommentDTO } from './comment.input.dto';
 import { ICommentService } from './comment.service.interface';
 
 @UseGuards(StaffGuard)
@@ -32,7 +32,7 @@ export class CommentController {
     return this.commentService.fetchAll();
   }
 
-  @Patch(':id')
+  @Patch()
   @ApiOperation({ summary: 'Modifier un commentaire' })
   @ApiResponse({ status: 200, description: 'Commentaire modifié.' })
   async update(@Body() dto: UpdateCommentDTO) {

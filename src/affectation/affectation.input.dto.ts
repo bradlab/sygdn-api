@@ -1,5 +1,5 @@
-import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
-import { ApiProperty } from '@nestjs/swagger';
+import { InputType, Field, ID, PartialType as GqlPartialType } from '@nestjs/graphql';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { IsDateString, IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ICreateAffectationDTO, IUpdateAffectationDTO } from './affectation.service.interface';
 
@@ -19,9 +19,9 @@ export class CreateAffectationDTO implements ICreateAffectationDTO {
   closedAt?: Date;
 
   @ApiProperty()
-  @Field(() => ID)
+  @Field(() => ID, { description: 'Utiliser DossierStep ID' })
   @IsUUID()
-  dossierId: string;
+  dossierStepId: string;
 
   @ApiProperty()
   @Field(() => ID)
@@ -35,8 +35,14 @@ export class CreateAffectationDTO implements ICreateAffectationDTO {
   taskId?: string;
 }
 
-@InputType()
 export class UpdateAffectationDTO extends PartialType(CreateAffectationDTO) implements IUpdateAffectationDTO {
+  @ApiProperty()
+  @Field(() => ID)
+  @IsUUID()
+  id: string;
+}
+@InputType()
+export class GqlUpdateAffectationDTO extends GqlPartialType(CreateAffectationDTO) implements IUpdateAffectationDTO {
   @ApiProperty()
   @Field(() => ID)
   @IsUUID()

@@ -4,7 +4,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { IDossierService } from './dossier.service.interface';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
+import { CreateDossierDTO, GqlUpdateDossierDTO, UpdateDossierDTO } from './dossier.input.dto';
 import { DossierClientFilterDTO } from './dossier-client-filter.input';
 import { BaseConfig } from 'config/base.config';
 import { DossierFactory } from 'adapter/factory/dossier.factory';

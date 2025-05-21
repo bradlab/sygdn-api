@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
-import { CreateStepDTO, UpdateStepDTO } from './step.input.dto';
+import { CreateStepDTO, GqlUpdateStepDTO, UpdateStepDTO } from './step.input.dto';
 import { IStepService } from './step.service.interface';
 
 @UseGuards(StaffGuard)
@@ -32,7 +32,7 @@ export class StepController {
     return this.stepService.fetchAll();
   }
 
-  @Patch(':id')
+  @Patch()
   @ApiOperation({ summary: 'Modifier une étape' })
   @ApiResponse({ status: 200, description: 'Étape modifiée.' })
   async update(@Body() dto: UpdateStepDTO) {
