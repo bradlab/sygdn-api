@@ -1,4 +1,5 @@
 import { RoleEnum } from 'app/enum';
+import { SexEnum } from 'app/enum/global.enum';
 import { IBasicPersonnalInfoDTO } from 'app/person.input.dto';
 import { IUserQuery } from 'auth/auth.service.interface';
 import { Staff } from 'domain/model/staff.model';
@@ -10,6 +11,7 @@ export interface ICreateUserDTO extends IBasicPersonnalInfoDTO {
   role: RoleEnum;
   degree?: string;
   avatar?: string;
+  sex?: SexEnum;
 }
 
 export interface IUpdateUserDTO extends Partial<ICreateUserDTO> {

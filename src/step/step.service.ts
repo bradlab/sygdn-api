@@ -49,7 +49,10 @@ export class StepService implements IStepService {
   }
 
   async fetchOne(id: string): Promise<Step> {
-    const step = await this.dbRepository.steps.findOneByID(id);
+    const step = await this.dbRepository.steps.findOne({
+      relations: { domain: true, tasks: true },
+      where: {id}
+    });
     if (!step) throw new NotFoundException('Step not found');
     return step;
   }

@@ -1,4 +1,4 @@
-import { MaritalStatusEnum, RoleEnum } from "app/enum";
+import { MaritalStatusEnum, RoleEnum, SexEnum } from "app/enum";
 import { Person } from "domain/interface/person.model";
 import { Affectation } from './affectation.model';
 import { IComment } from './comment.model';
@@ -8,6 +8,7 @@ export class Staff extends Person {
   password: string;
   email?: string;
   degree?: string;
+  sex?: SexEnum;
   code?: string;
   maritalStatus?: MaritalStatusEnum;
   affectations?: Affectation[];

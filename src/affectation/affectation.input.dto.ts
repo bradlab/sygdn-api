@@ -5,8 +5,9 @@ import { ICreateAffectationDTO, IUpdateAffectationDTO } from './affectation.serv
 
 @InputType()
 export class CreateAffectationDTO implements ICreateAffectationDTO {
-  @ApiProperty()
-  @Field()
+  @ApiProperty({ required: false })
+  @Field({ nullable: true })
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
   report: string;

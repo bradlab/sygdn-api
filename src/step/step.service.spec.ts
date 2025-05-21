@@ -77,11 +77,11 @@ describe('StepService', () => {
 
   describe('fetchOne', () => {
     it('should return a step by id', async () => {
-      repository.steps.findOneByID = jest.fn().mockResolvedValue(data);
+      repository.steps.findOne = jest.fn().mockResolvedValue(data);
       await expect(service.fetchOne('step-uuid')).resolves.toEqual(data);
     });
     it('should throw not found if step does not exist', async () => {
-      repository.steps.findOneByID = jest.fn().mockResolvedValue(undefined);
+      repository.steps.findOne = jest.fn().mockResolvedValue(undefined);
       await expect(service.fetchOne('step-uuid')).rejects.toThrow(
         NotFoundException,
       );
@@ -91,19 +91,19 @@ describe('StepService', () => {
   describe('edit', () => {
     it('should update a step', async () => {
     const dto: IUpdateStepDTO = { ...data, id: respData.id, name: 'Updated', };
-      repository.steps.findOneByID = jest.fn().mockResolvedValue(respData);
+      repository.steps.findOne = jest.fn().mockResolvedValue(respData);
       repository.steps.update = jest.fn().mockResolvedValue({
         ...respData,
         name: 'Updated',
       });
       const rep = await service.edit(dto);
 
-      expect(repository.steps.findOneByID).toHaveBeenCalled();
+      expect(repository.steps.findOne).toHaveBeenCalled();
       expect(repository.steps.update).toHaveBeenCalled();
       expect(rep).toEqual({ ...respData, name: 'Updated' });
     });
     it('should throw not found if step does not exist', async () => {
-      repository.steps.findOneByID = jest.fn().mockResolvedValue(undefined);
+      repository.steps.findOne = jest.fn().mockResolvedValue(undefined);
       const dto: IUpdateStepDTO = { ...data, id: respData.id };
       await expect(service.edit(dto)).rejects.toThrow(NotFoundException);
     });
