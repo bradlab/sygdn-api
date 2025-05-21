@@ -27,9 +27,7 @@ export class DossierService implements IDossierService {
         throw new ConflictException(
           'Dossier with the same name already exists in this domain',
         );
-      const domain = await this.dbRepository.domains.findOneByID(
-        data.domainId,
-      );
+      const domain = await this.dbRepository.domains.findOneByID(data.domainId);
       if (!domain) throw new NotFoundException('Domain not found');
       return await this.dbRepository.dossiers.create(
         DossierFactory.create(data, domain),
@@ -41,7 +39,15 @@ export class DossierService implements IDossierService {
   }
 
   async fetchOne(id: string): Promise<Dossier> {
-    const dossier = await this.dbRepository.dossiers.findOneByID(id);
+    const dossier = await this.dbRepository.dossiers.findOne({
+      where: { id },
+      relations: {
+        domain: true,
+        steps: {step: true},
+        comments: true,
+        affectations: { staff: true, user: true, task: true },
+      },
+    });
     if (!dossier) throw new NotFoundException('Dossier not found');
     return dossier;
   }

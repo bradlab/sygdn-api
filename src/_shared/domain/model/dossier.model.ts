@@ -8,6 +8,7 @@ export class Dossier extends ITimestamp {
   id: string;
   name: string;
   file: string; // upload file
+  description?: string;
   closedAt?: Date;
   domain: IDomain;
   steps?: DossierStep[];

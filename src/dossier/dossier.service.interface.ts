@@ -5,6 +5,7 @@ export interface ICreateDossierDTO {
   name: string;
   file: string;
   closedAt?: Date;
+  description?: string;
   domainId: string;
 }
 

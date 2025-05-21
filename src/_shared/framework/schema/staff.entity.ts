@@ -13,11 +13,11 @@ import { CommentEntity } from './comment.entity';
 @Index(['phone'], { unique: true, where: `deleted_at IS NULL` })
 @Index(['email'], { unique: true, where: `deleted_at IS NULL` })
 export class StaffEntity extends PersonAbstract implements Staff {
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   email?: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true, enum: SexEnum })
   sex?: SexEnum;
 

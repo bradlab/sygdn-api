@@ -46,7 +46,7 @@ export abstract class BaseConfig {
   static fileFilter = (_, file: any, callback: any): void => {
     if (
       !file.originalname.match(
-        /\.(jpg|jpeg|png|gif|jfif|svg|avif|webp|docx|txt|doc|xls|xlsx|pdf|csv|mp3|wav|bwf|ogg|flac|avi|mp4|mkv|mov|flv)$/,
+        /\.(jpg|jpeg|png|gif|jfif|svg|avif|webp|docx|txt|doc|xls|xlsx|pptx|pdf|csv|mp3|wav|bwf|ogg|flac|avi|mp4|mkv|mov|flv)$/,
       )
     ) {
       callback(new Error('Only authorized extension are allowed!'), false);
@@ -62,7 +62,7 @@ export abstract class BaseConfig {
   };
 
   static docFileFilter = (_, file: any, callback: any): void => {
-    if (!file.originalname.match(/\.(docx|txt|doc|xls|xlsx|pdf|csv)$/)) {
+    if (!file.originalname.match(/\.(docx|txt|doc|xls|xlsx|pptx|pdf|csv)$/)) {
       callback(new Error('Only doc files are allowed!'), false);
     }
     callback(null, true);

@@ -8,16 +8,18 @@ import { StepStatusEnum } from 'app/enum';
 export class CreateDossierStepDTO implements ICreateDossierStepDTO {
   @ApiProperty()
   @Field()
+  // @Field(() => GraphQLISODateTime)
   @IsDateString()
   startDate: Date;
 
   @ApiProperty({ required: false })
   @Field({ nullable: true })
+  // @Field(() => GraphQLISODateTime, { nullable: true })
   @IsOptional()
   @IsDateString()
   endDate?: Date;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, enum: StepStatusEnum })
   @Field({ nullable: true })
   @IsOptional()
   @IsString()

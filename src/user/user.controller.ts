@@ -95,7 +95,7 @@ export class UserController {
    */
 
   @Post()
-  @ApiConsumes('multipart/form-data', 'application/json')
+  // @ApiConsumes('multipart/form-data', 'application/json')
   @ApiOperation({
     summary: 'Create account user',
     description:
@@ -115,7 +115,7 @@ export class UserController {
    */
 
   @Patch()
-  @ApiConsumes('multipart/form-data', 'application/json')
+  // @ApiConsumes('multipart/form-data', 'application/json')
   @ApiOperation({ summary: 'Update user account' })
   @ApiBody({ type: UpdateUserDTO })
   @ApiResponse({ type: DocUserDTO })

@@ -12,8 +12,6 @@ import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { fDate } from './_shared/util/date.helper';
 import { HttpExceptionFilter } from 'adapter/http/http-exception.filter';
-import { GqlExecutionContext } from '@nestjs/graphql';
-import { ThrottlerGuard } from '@nestjs/throttler';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -18,7 +18,8 @@ export abstract class ATimestamp {
   deletedAt?: Date;
 }
 
-export class PersonAbstract extends ATimestamp implements Person {
+@ObjectType({ isAbstract: true })
+export abstract class PersonAbstract extends ATimestamp implements Person {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;
