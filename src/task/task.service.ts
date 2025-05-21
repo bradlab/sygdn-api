@@ -9,11 +9,15 @@ export class TaskService implements ITaskService {
   private readonly logger = new Logger();
   constructor(private dbRepository: IDBRepository) {}
 
-  async add(input: ICreateTaskDTO): Promise<ITask> {
+  async add(data: ICreateTaskDTO): Promise<ITask> {
     try {
-      const step = await this.dbRepository.steps.findOneByID(input.stepId);
+      const step = await this.dbRepository.steps.findOneByID(data.stepId);
       if (!step) throw new NotFoundException('Step not found');
-      return await this.dbRepository.tasks.create(TaskFactory.create(input, step));
+      const existed = await this.dbRepository.tasks.findOne({
+        where: {step: {id: data.stepId}, name: data.name}
+      });
+      if (existed) throw new ConflictException('A task with the same name allready exists for this step');
+      return await this.dbRepository.tasks.create(TaskFactory.create(data, step));
     } catch (error) {
       this.logger.error(error, 'ERROR::TaskService.add');
       throw error;
@@ -35,16 +39,16 @@ export class TaskService implements ITaskService {
     }
   }
 
-  async edit(input: IUpdateTaskDTO): Promise<ITask> {
+  async edit(data: IUpdateTaskDTO): Promise<ITask> {
     try {
-      const task = await this.dbRepository.tasks.findOneByID(input.id);
+      const task = await this.dbRepository.tasks.findOneByID(data.id);
       if (!task) throw new NotFoundException('Task not found');
       let step = task.step;
-      if (input.stepId && input.stepId !== (task.step as any)?.id) {
-        step = await this.dbRepository.steps.findOneByID(input.stepId);
+      if (data.stepId && data.stepId !== (task.step as any)?.id) {
+        step = await this.dbRepository.steps.findOneByID(data.stepId);
         if (!step) throw new NotFoundException('Step not found');
       }
-      const updated = { ...task, ...input, step };
+      const updated = { ...task, ...data, step };
       return this.dbRepository.tasks.update(updated);
     } catch (error) {
       this.logger.error(error, 'ERROR::TaskService.edit');

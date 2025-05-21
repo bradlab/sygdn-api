@@ -65,7 +65,6 @@ export class UserService implements IUserService {
           order: { createdAt: 'DESC' },
         });
       }
-
       return [];
     }
     return await this.dbRepository.users.find({
@@ -75,7 +74,7 @@ export class UserService implements IUserService {
 
   async search(data: Partial<Staff>): Promise<Staff> {
     try {
-      return await this.authService.search(data );
+      return await this.authService.search(data);
     } catch (error) {
       this.logger.error(error, 'ERROR::UserService.search');
       return null as unknown as Staff;

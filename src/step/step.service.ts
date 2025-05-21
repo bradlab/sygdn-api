@@ -23,7 +23,7 @@ export class StepService implements IStepService {
         const domain = data.domainId && await this.dbRepository.domains.findOneByID(data.domainId);
       if (!domain) throw new NotFoundException('Domain not found');
       const existingStep = await this.dbRepository.steps.findOne({
-        where: { name: data.name, domain: data.domainId },
+        where: { name: data.name, domain: {id: data.domainId} },
       });
       if (existingStep) {
         throw new ConflictException(

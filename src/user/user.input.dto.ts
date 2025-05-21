@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { BasicPersonnalInfoDTO } from 'adapter/param.dto';
 import { RoleEnum } from 'app/enum';
-import { IsEnum, IsString, IsUUID } from 'class-validator';
+import { IsEnum, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UserAccoutDTO extends BasicPersonnalInfoDTO {
   @ApiProperty({ type: String, format: 'binary', required: false })
@@ -46,7 +46,9 @@ export class UserQueryDTO extends PartialType(UserAccoutDTO) {
   @ApiProperty({
     type: String,
     description: 'ID of the given user',
+    required: false
   })
+  @IsOptional()
   @IsString({each: true})
   @IsUUID(undefined, {each: true})
   ids?: string[];

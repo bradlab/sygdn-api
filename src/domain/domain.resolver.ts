@@ -1,10 +1,15 @@
 import { Resolver, Query, Mutation, Args, ID } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 import { CreateDomainDTO, UpdateDomainDTO } from './domain.input.dto';
 import { DomainEntity } from 'framework/schema/domain.entity';
 import { ODomain } from 'domain/model/domain.model';
 import { DomainFactory } from 'adapter/factory/domain.factory';
 import { IDomainService } from './domain.service.interface';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { StaffGuard } from 'adapter/guard/auth.guard';
 
+@UseGuards(StaffGuard)
+@ApiBearerAuth()
 @Resolver(() => DomainEntity)
 export class DomainResolver {
   constructor(private readonly domainService: IDomainService) {} // Injection de dépendance du service Domain

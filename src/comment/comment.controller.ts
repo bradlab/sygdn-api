@@ -1,10 +1,11 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { StaffGuard } from 'adapter/guard/auth.guard';
 import { CreateCommentDTO, UpdateCommentDTO } from './comment.input.dto';
 import { ICommentService } from './comment.service.interface';
 
 @UseGuards(StaffGuard)
+@ApiBearerAuth()
 @ApiTags('Comment management')
 @Controller('comments')
 export class CommentController {

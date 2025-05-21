@@ -3,10 +3,11 @@ import { IDomainService } from './domain.service.interface';
 import { DomainService } from './domain.service';
 import { DomainResolver } from './domain.resolver';
 import { UserModule } from 'user/user.module';
+import { DomainController } from './domain.controller';
 
 @Module({
   imports: [UserModule],
-  controllers: [],
+  controllers: [DomainController],
   providers: [DomainResolver, { provide: IDomainService, useClass: DomainService }],
   exports: [IDomainService],
 })
