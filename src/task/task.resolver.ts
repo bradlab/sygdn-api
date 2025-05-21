@@ -1,21 +1,20 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { TaskService } from './task.service';
 import { ITask } from 'domain/model/task.model';
 import { CreateTaskDTO, UpdateTaskDTO } from './task.input.dto';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { ITaskService } from './task.service.interface';
 import { TaskEntity } from 'framework/schema/task.entity';
 
 @ApiTags('Tasks of step management')
 @ApiBearerAuth()
 @Resolver(() => TaskEntity)
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 export class TaskResolver {
   constructor(private readonly taskService: ITaskService) {}
 
-  @Query(() => [TaskEntity], { name: 'tasks' })
+  @Query(() => [TaskEntity], { name: 'tasks', description: 'Afficher la liste des tâches' })
   async fetchAll(): Promise<ITask[]> {
     return this.taskService.fetchAll();
   }

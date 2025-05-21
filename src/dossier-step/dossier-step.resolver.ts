@@ -3,14 +3,14 @@ import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { DossierStep } from 'domain/model/dossier-step.model';
 import { CreateDossierStepDTO, UpdateDossierStepDTO } from './dossier-step.input.dto';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 import { IDossierStepService } from './dossier-step.service.interface';
 import { DossierStepEntity } from 'framework/schema/dossier-step.entity';
 
 @ApiTags('DossierStep')
 @ApiBearerAuth()
 @Resolver(() => DossierStepEntity)
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 export class DossierStepResolver {
   constructor(private readonly dossierStepService: IDossierStepService) {}
 

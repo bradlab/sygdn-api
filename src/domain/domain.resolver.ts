@@ -6,9 +6,9 @@ import { ODomain } from 'domain/model/domain.model';
 import { DomainFactory } from 'adapter/factory/domain.factory';
 import { IDomainService } from './domain.service.interface';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { StaffGuard } from 'adapter/guard/auth.guard';
+import { GqlAuthGuard } from 'adapter/guard/auth.guard';
 
-@UseGuards(StaffGuard)
+@UseGuards(GqlAuthGuard)
 @ApiBearerAuth()
 @Resolver(() => DomainEntity)
 export class DomainResolver {

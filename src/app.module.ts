@@ -83,6 +83,11 @@ export class IAppModule {}
       // autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // Chemin où le schéma sera généré
       sortSchema: true, // Trie le schéma généré
       graphiql: true, // Active l'interface graphique interactive (GraphQL Playground) en mode dev
+      context: ({ req }) => {
+        const authHeader = req.headers?.authorization || '';
+        const token = authHeader.replace('Bearer ', '');
+        return { req, headers: req.headers, };
+      },
       installSubscriptionHandlers: true,
       buildSchemaOptions: {
         directives: [
