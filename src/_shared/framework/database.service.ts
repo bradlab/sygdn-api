@@ -61,10 +61,10 @@ export class DBRepository implements IDBRepository, OnApplicationBootstrap {
     this.users = new DBGenericRepository<StaffEntity>(this.userRepository);
     this.domains = new DBGenericRepository<DomainEntity>(this.domainRepository);
     this.steps = new DBGenericRepository<StepEntity>(this.stepRepository);
-    this.dossiers = new DBGenericRepository<Dossier>(this.dossierRepository);
-    this.comments = new DBGenericRepository<IComment>(this.commentRepository);
-    this.tasks = new DBGenericRepository<ITask>(this.taskRepository);
-    this.dossierSteps = new DBGenericRepository<DossierStep>(this.dossierStepRepository);
-    this.affectations = new DBGenericRepository<Affectation>(this.affectationRepository);
+    this.dossiers = new DBGenericRepository<DossierEntity>(this.dossierRepository);
+    this.comments = new DBGenericRepository<CommentEntity>(this.commentRepository);
+    this.tasks = new DBGenericRepository<TaskEntity>(this.taskRepository);
+    this.dossierSteps = new DBGenericRepository<DossierStepEntity>(this.dossierStepRepository);
+    this.affectations = new DBGenericRepository<AffectationEntity>(this.affectationRepository);
   }
 }

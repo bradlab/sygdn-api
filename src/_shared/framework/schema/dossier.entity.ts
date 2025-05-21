@@ -22,8 +22,12 @@ export class DossierEntity extends ATimestamp implements Dossier {
   @Column()
   name: string;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  description: string;
+
+  @Field({nullable: true})
+  @Column({nullable: true})
   file: string;
 
   @Field({ nullable: true })

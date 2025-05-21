@@ -29,12 +29,19 @@ export class DossierStepService implements IDossierStepService {
           'DossierStep with the same step already exists for this dossier',
         );
       }
-      const dossier = await this.dbRepository.dossiers.findOneByID(
-        data.dossierId,
+      const dossier = await this.dbRepository.dossiers.findOne(
+        {
+          where: { id: data.dossierId },
+          relations: {domain: true}
+        },
       );
-      const step = await this.dbRepository.steps.findOneByID(data.stepId);
-      if (!step || !dossier)
-        throw new NotFoundException('Dossier or Step not found');
+      if (!dossier) throw new NotFoundException('Dossier not found');
+      // Vérifier l'existence du step
+      const step = await this.dbRepository.steps.findOne({
+        where: { id: data.stepId, domain: { id: dossier.domain.id } },
+      });
+      if (!step)
+        throw new NotFoundException('Domain Step not found');
       return await this.dbRepository.dossierSteps.create(
         DossierStepFactory.create(data, dossier, step),
       );

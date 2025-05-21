@@ -107,15 +107,16 @@ export class GqlAuthGuard implements CanActivate {
     if (isPublic) {
       return true;
     }
-
     try {
       const token = _extractTokenFromHeader(request);
       if (token) {
         const payload: IJwtPayload = await this._getPayload(token);
         const user = await this._validate(payload);
-        request['user'] = user;
         if (!user) {
           throw new UnauthorizedException();
+        } else {
+          const { password, deletedAt, ...rest } = user;
+          request['user'] = rest;
         }
         return true;
       }

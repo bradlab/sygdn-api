@@ -1,5 +1,6 @@
 import { InputType, Field, ID, PartialType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
+// import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 import { ICreateDossierDTO, IUpdateDossierDTO } from './dossier.service.interface';
 
@@ -11,11 +12,17 @@ export class CreateDossierDTO implements ICreateDossierDTO {
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty()
-  @Field()
+  @ApiProperty({ required: false })
+  @Field({ nullable: true })
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  file: string;
+  description?: string;
+
+  // file: string;
+  @ApiProperty({format: 'binary', required: false})
+  @Field({ nullable: true })
+  // @Field(() => GraphQLUpload)
+  file: string; 
 
   @ApiProperty()
   @Field(() => ID)
