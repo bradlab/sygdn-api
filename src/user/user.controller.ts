@@ -104,7 +104,7 @@ export class UserController {
   @ApiBody({ type: RegisterUserDTO })
   @ApiResponse({ type: DocUserDTO })
   async create(@Body() data: RegisterUserDTO): Promise<OUser> {
-    data.password = DataGenerator.randomString();
+    // data.password = DataGenerator.randomString();
     const user = await this.userService.add(data);
     if (user) return { ...StaffFactory.getUser(user), password: data.password };
     return null as unknown as OUser;
