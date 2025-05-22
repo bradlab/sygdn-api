@@ -43,9 +43,8 @@ export class DossierService implements IDossierService {
       where: { id },
       relations: {
         domain: true,
-        steps: {step: true},
+        steps: {step: true, affectations: { staff: true, user: true, task: true }},
         comments: true,
-        affectations: { staff: true, user: true, task: true },
       },
     });
     if (!dossier) throw new NotFoundException('Dossier not found');
