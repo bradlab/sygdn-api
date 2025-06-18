@@ -91,6 +91,7 @@ DATABASE_PASSWORD=user_password
 DATABASE_NAME=db_name
 PORT=3000
 ```
+Ajouter le nom du fichier .env dans la config de app.module.ts
 
 ---
 
