@@ -39,8 +39,8 @@ Le projet sygdn-api est principalement développé avec :
 ## Aperçu du processus de contribution
 
 ```mermaid
-flowchart TD
-    A[Vous avez une idée / bug] --> B[Créer une issue (optionnel)]
+flowchart TB
+    A[Vous avez une idée / bug] --> B[Créer une issue]
     B --> C[Forker le repo]
     C --> D[Créer une branche depuis develop]
     D --> E[Développer et tester]

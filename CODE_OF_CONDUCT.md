@@ -1,6 +1,18 @@
 # **ENGLISH**
 ## Code of Conduct for the sygdn-api Project
 
+### Table of Contents
+
+- [Our Commitment](#our-commitment)
+- [Our Standards](#our-standards)
+- [Our Responsibilities](#our-responsibilities)
+- [Scope](#scope)
+- [Enforcement](#enforcement)
+- [Appeal Procedure](#appeal-procedure)
+- [Attribution](#attribution)
+
+---
+
 ### Our Commitment
 
 We, as contributors and maintainers of this project, pledge to make participation in our project a harassment-free experience for everyone, regardless of experience level, gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, or religion.
