@@ -203,7 +203,7 @@ yarn typeorm migration:revert
 Pour toute question ou contribution :
 
 - Auteur : **bradlab**
-- Email : `matbradiouf@example.com`
+- Email : `matbradiouf@gmail.com`
 - GitHub : [https://github.com/bradlab](https://github.com/bradlab)
 
 ---
