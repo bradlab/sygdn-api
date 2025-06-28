@@ -91,6 +91,7 @@ DATABASE_PASSWORD=user_password
 DATABASE_NAME=db_name
 PORT=3000
 ```
+Ajouter le nom du fichier .env dans la config de app.module.ts
 
 ---
 
@@ -202,7 +203,7 @@ yarn typeorm migration:revert
 Pour toute question ou contribution :
 
 - Auteur : **bradlab**
-- Email : `matbradiouf@example.com`
+- Email : `matbradiouf@gmail.com`
 - GitHub : [https://github.com/bradlab](https://github.com/bradlab)
 
 ---
